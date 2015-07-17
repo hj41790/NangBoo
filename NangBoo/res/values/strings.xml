@@ -3,5 +3,12 @@
 
     <string name="app_name">NangBoo</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_main">냉장고를 부탁해!</string>
+    <string name="chooseIngredient_main">재료선택</string>
+    <string name="sort_main">정렬</string>
+    <string name="addIngredient_main">재료\n추가</string>
+    <string name="searchingRecipe_main">레시피\n검색</string>
+    <string name="bookmark_main">즐겨찾기</string>
+    <string name="setting_main">설정</string>
 
 </resources>
