@@ -10,5 +10,10 @@
     <string name="searchingRecipe_main">레시피\n검색</string>
     <string name="bookmark_main">즐겨찾기</string>
     <string name="setting_main">설정</string>
+    <string-array name="ingredient_name_array">
+        <item >당근</item>
+    </string-array>
+    
+    
 
 </resources>
