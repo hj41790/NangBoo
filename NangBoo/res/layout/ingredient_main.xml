@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal" 
+    android:background="#FFFF00">
     
     <TextView android:id="@+id/name_ingredient"
         android:layout_width="0dp"
@@ -12,8 +13,9 @@
         android:textColor="#000"/>
     
     <TextView android:id="@+id/expiration_ingredient"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:textColor="#7D7D7D"/>
         
 

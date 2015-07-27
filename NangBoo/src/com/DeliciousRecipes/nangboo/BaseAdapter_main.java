@@ -3,6 +3,7 @@ package com.DeliciousRecipes.nangboo;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,18 +22,50 @@ public class BaseAdapter_main extends BaseAdapter{
 		mLayoutInflater = LayoutInflater.from(mContext);
 	}
 	
+	// 재료 추가
 	public void add(int index, Ingredient addData){
 		mData.add(index, addData);
 		notifyDataSetChanged();
 	}
 	
-	public void delete(int index){
-		mData.remove(index);
+	// 선택사항 삭제
+	public int delete(){
+		
+		int i=0, count=0;
+		while(i<mData.size()){
+			if(mData.get(i).isChoosed) {
+				mData.remove(i);
+				count++;
+				i--;
+			}
+			
+			i++;
+		}
+		notifyDataSetChanged();
+		
+		return count;
+	}
+	
+	public void modify(int position, String[] info){
+		mData.get(position).name = info[0];
+		mData.get(position).expirationDate = info[1];
+		mData.get(position).memo = info[2];
+
 		notifyDataSetChanged();
 	}
 	
+	// 재료선택 버튼 껐을 때 선택 모두 초기화
 	public void clear(){
-		mData.clear();
+		for(int i=0; i<mData.size(); i++){
+			Ingredient tmp = mData.get(i);
+			tmp.isChoosed = false;
+		}
+		notifyDataSetChanged();
+	}	
+	
+	// 아이템이 선택 되었을 때 값 변경 및 뷰 새로그리기
+	public void itemChoosed(int position){
+		mData.get(position).isChoosed = !mData.get(position).isChoosed;
 		notifyDataSetChanged();
 	}
 	
@@ -74,6 +107,9 @@ public class BaseAdapter_main extends BaseAdapter{
 		else{
 			viewHolder = (ViewHolder)itemLayout.getTag();
 		}
+		
+		if(mData.get(position).isChoosed) itemLayout.setBackgroundColor(Color.rgb(255,140,90));
+		else itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
 		
 		viewHolder.name.setText(mData.get(position).name);
 		viewHolder.expiration.setText(mData.get(position).expirationDate);
