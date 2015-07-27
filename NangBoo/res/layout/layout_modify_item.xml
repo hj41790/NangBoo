@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFE2BB"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+        
+        <Button android:id="@+id/modifyButton_modifyItem"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_selector_main"
+            android:text="수정"/>
+        
+        <Button android:id="@+id/closeButton_modifyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/btn_dialog_normal"/>"
+        
+    </LinearLayout>
+    
+    
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        
+        <TextView 
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="#000"
+            android:text="이름"/>
+        
+        <EditText android:id="@+id/name_modifyItem"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="12dp"
+            android:enabled="false"/>
+            
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        
+        <TextView 
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="#000"
+            android:text="유통기한"/>
+        
+        <EditText android:id="@+id/expiration_modifyItem"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textSize="10dp"
+            android:enabled="false"
+            android:inputType="date"/>
+            
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        
+        <TextView 
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="#000"
+            android:text="메모"/>
+        
+        <EditText android:id="@+id/memo_modifyItem"
+            android:layout_width="170dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="12dp"
+            android:enabled="false"/>
+            
+    </LinearLayout>
+
+</LinearLayout>
