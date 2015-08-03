@@ -3,11 +3,10 @@ package com.DeliciousRecipes.nangboo;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -126,6 +125,18 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		/* 여기부터 경원이가 인텐트 해본다고 추가한거 ^-^! 된당!!!!!!!!!
+		 * 다른 버튼에도 리스너~>인텐트 넣어주기^ㅇ^ㅇ!!!!!!!!!
+		 * */
+		addIngredient.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, AddActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		/* 요기까지 */
 	}
 	
 	
