@@ -16,5 +16,7 @@
     <string name="expiration_date_setting">유통기한</string>
     <string name="back">BACK</string>
     <string name="ok">OK</string>
+    
+    <string name="title_activity_modify">ModifyActivity</string>
 
 </resources>
