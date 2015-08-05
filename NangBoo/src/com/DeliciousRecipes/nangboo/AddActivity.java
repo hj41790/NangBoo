@@ -23,9 +23,10 @@ public class AddActivity extends Activity  {
 
 	SimpleDateFormat format;
 	Button date_button;
+
 	/*
-	 * 수정해야돼
-	 * 2. 메모 입력하는 란 추가
+	 *  수정해야돼
+	 *  OK누르면 재료 추가 완료되도록!
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,15 +67,14 @@ public class AddActivity extends Activity  {
 				OnDateSetListener datePickerDialogListener = new OnDateSetListener(){
 					@Override
 					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-						
-						String dateString = year+"."+(monthOfYear+1)+"."+dayOfMonth;	
-						try {
-							Date d = format.parse(dateString);
-							date_button.setText(format.format(d));
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+							String dateString = year+"."+(monthOfYear+1)+"."+dayOfMonth;	
+							try {
+								Date d = format.parse(dateString);
+								date_button.setText(format.format(d));
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
 				};
 				//만들어서 show

@@ -3,6 +3,8 @@ package com.DeliciousRecipes.nangboo;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -129,9 +131,54 @@ public class MainActivity extends Activity {
 		 * 다른 버튼에도 리스너~>인텐트 넣어주기^ㅇ^ㅇ!!!!!!!!!
 		 * */
 		addIngredient.setOnClickListener(new View.OnClickListener() {
+			int selected;
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, AddActivity.class);
+				//재료 선택 방식 선택하는 팝업창
+				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+				builder.setTitle("추가 방법 선택");
+				final String items[] = {"QR코드 인식", "직접 입력"};
+				builder.setSingleChoiceItems(items, 0,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								selected = which;
+							}
+						}).setPositiveButton("확인",
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										//확인 버튼 터치
+										//여기서 선택한 값을 넘기면됨
+										if(selected==0)//QR코드 인식
+											;//
+										else if(selected==1)//직접 입력
+										{
+											dialog.dismiss();
+											Intent intent = new Intent(MainActivity.this, AddActivity.class);
+											startActivity(intent);						
+										}
+									}
+								}).setNegativeButton("취소", 
+										new DialogInterface.OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialog, int which) {
+												//취소 버튼 터치
+												dialog.dismiss();
+											}
+										});//buildr.stSingleChoiceItems 끝
+				builder.show();
+										
+				
+				
+				
+			}
+		});//재료추가 끝
+		
+		setting.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, SettingActivity.class);
 				startActivity(intent);
 			}
 		});

@@ -1,49 +1,64 @@
 package com.DeliciousRecipes.nangboo;
 
-import java.util.ArrayList;
-
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
-public class SettingActivity extends Activity {
+/* 리스트뷰의 늪ㅍㅍㅍㅍㅍㅍㅍ*/
 
-	ListView mListView = null;
-	BaseAdapter_setting mAdapter = null;
 
-	final String[] list = new String[]{"알림", "테마", "글자 크기", "버전 및 개발진 정보"};
+public class SettingActivity extends ListActivity implements OnItemClickListener {
+
+//	ListView mListView = null;
+//	BaseAdapter_setting mAdapter = null;
+
+	final String[] items = new String[]{"알림", "테마", "글자 크기", "버전 및 개발진 정보"};
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_setting);
-		
-		
-//		// 리스트뷰 생성 및 아이템 선택 리스너 설정
-//		mAdapter = new BaseAdapter_setting(this);
-//		mListView = (ListView) findViewById(R.id.listview_main);
-//		mListView.setAdapter(mAdapter);
+//		setContentView(R.layout.activity_setting);
 
-		//ArrayAdapter 사용해봄....
+//		setListAdapter((ListAdapter) new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, items));
 		
-		   mListView = (ListView)findViewById(R.id.listview_setting);
-	       
-//	        ArrayList<String> dataArr = new ArrayList<String>();
-//	        dataArr.add("JAVA");
-//	        dataArr.add("JSP");
-//	        dataArr.add("EJB");
-//	        dataArr.add("ANDROID");
+		ArrayAdapter<String> adapter;
+		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+		
+		ListView list = (ListView)findViewById(R.id.list);
+		list.setAdapter(adapter);
+		
+		list.setOnItemClickListener(this);
+		
+	}
+	
+	
+	
+//	@Override
+//	protected void onListItemClick(ListView l, View v, int position, long id) {
+//		// TODO Auto-generated method stub
+//		super.onListItemClick(l, v, position, id);
+//	}
 
-	        ArrayAdapter<String> Adapter = new ArrayAdapter<String>  (this, android.R.layout.simple_list_item_1, list);
 
-	        mListView.setAdapter(Adapter);
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		Toast.makeText(this, items[position]+" is clicked.", Toast.LENGTH_LONG).show();
+			
 	}
 
-	
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
