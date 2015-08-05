@@ -1,0 +1,129 @@
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:orientation="vertical"
+    tools:context="com.DeliciousRecipes.nangboo" >
+
+    <!--  액션바 대신에 LinearLayout! height는 40dp로 통일해주세용 -->
+    
+    <LinearLayout
+        android:id="@+id/action_bar_modify"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:background="@color/yellow"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/back_button_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:text="@string/back"
+            android:background="@color/yellow"
+            />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_horizontal"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/modify_button_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:background="@color/yellow"
+            android:text="수정" />
+
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+
+        >
+        
+        <TextView
+            android:id="@+id/product_name_textview_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+			android:layout_marginLeft="40dp"
+            android:text="@string/product_name_setting"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            
+            />
+        
+        <EditText
+            android:id="@+id/product_name_edittext_modify"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+			android:layout_marginLeft="40dp"
+			android:layout_marginRight="40dp"
+            android:enabled="false"
+			android:gravity="center"
+            android:inputType="text"
+            android:background="@color/yellow"
+            android:layout_below="@id/product_name_textview_modify" />
+
+		<TextView
+            android:id="@+id/expiration_date_textview_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+			android:layout_marginLeft="40dp"
+            android:text="@string/expiration_date_setting"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_below="@id/product_name_edittext_modify"
+            />
+		
+        <Button
+            android:id="@+id/expiration_date_button_modify"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+			android:layout_marginLeft="40dp"
+			android:layout_marginRight="40dp"
+            android:text="@string/current_date"
+            android:background="@color/yellow"
+            android:enabled="false"
+            android:layout_below="@id/expiration_date_textview_modify"
+            />
+        
+        <TextView
+            android:id="@+id/memo_textview_add_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+			android:layout_marginLeft="40dp"
+			android:text="메모"
+			android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_below="@id/expiration_date_button_modify"
+            />
+        
+        <EditText 
+            android:id="@+id/memo_modify"
+ 			android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/yellow"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="40dp"
+			android:layout_marginRight="40dp"
+			android:paddingLeft="8dp"
+			android:textSize="15dp"
+			android:enabled="false"
+			android:layout_below="@id/memo_textview_add_modify"
+            />
+    </RelativeLayout>
+        
+    
+</LinearLayout>

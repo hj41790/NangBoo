@@ -2,7 +2,9 @@ package com.DeliciousRecipes.nangboo;
 
 import java.util.ArrayList;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,111 +12,165 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class BaseAdapter_main extends BaseAdapter{
+public class BaseAdapter_main extends BaseAdapter {
+
+	Context mContext = null;
+	LayoutInflater mLayoutInflater = null;
+	IngredientDBManager mDBmanager = null;
 	
-	Context 				mContext 		= null;
-	ArrayList<Ingredient> 	mData 			= null;
-	LayoutInflater 			mLayoutInflater = null;
-	
-	public BaseAdapter_main(Context context, ArrayList<Ingredient> data){
+	public BaseAdapter_main(Context context) {
 		mContext = context;
-		mData = data;
 		mLayoutInflater = LayoutInflater.from(mContext);
+		
+		mDBmanager = IngredientDBManager.getInstance(mContext);	
 	}
-	
+
 	// 재료 추가
-	public void add(int index, Ingredient addData){
-		mData.add(index, addData);
+	public void add(Ingredient addData) {
+		
+		ContentValues addRowValue = new ContentValues();
+		
+		addRowValue.put("name", addData.name);
+		addRowValue.put("expirationDate", addData.expirationDate);
+		addRowValue.put("memo", addData.memo);
+		addRowValue.put("isChoosed", 0);
+		
+		mDBmanager.insert(addRowValue);
 		notifyDataSetChanged();
 	}
-	
+
 	// 선택사항 삭제
-	public int delete(){
+	public int delete() {
 		
-		int i=0, count=0;
-		while(i<mData.size()){
-			if(mData.get(i).isChoosed) {
-				mData.remove(i);
-				count++;
-				i--;
-			}
-			
-			i++;
+		Cursor mCursor = mDBmanager.query(  new String[]{"isChoosed"},
+											null, null, null, null, null);
+		
+		int count=0;
+		
+		while(mCursor.moveToNext()){
+			if(mCursor.getInt(0)==1) count++;
 		}
-		notifyDataSetChanged();
 		
+		mCursor.close();
+		
+		mDBmanager.delete("isChoosed=1", null);
+		
+		notifyDataSetChanged();
+
 		return count;
 	}
-	
-	public void modify(int position, String[] info){
-		mData.get(position).name = info[0];
-		mData.get(position).expirationDate = info[1];
-		mData.get(position).memo = info[2];
+
+	public void modify(int position, Ingredient tmp) {
+		
+		ContentValues updateRowValue = new ContentValues();
+		updateRowValue.put("name", tmp.name);
+		updateRowValue.put("expirationDate", tmp.expirationDate);
+		updateRowValue.put("memo", tmp.memo);
+		
+		mDBmanager.update(updateRowValue, "_id="+getID(position), null);
+		
 
 		notifyDataSetChanged();
 	}
-	
+
 	// 재료선택 버튼 껐을 때 선택 모두 초기화
-	public void clear(){
-		for(int i=0; i<mData.size(); i++){
-			Ingredient tmp = mData.get(i);
-			tmp.isChoosed = false;
-		}
-		notifyDataSetChanged();
-	}	
-	
-	// 아이템이 선택 되었을 때 값 변경 및 뷰 새로그리기
-	public void itemChoosed(int position){
-		mData.get(position).isChoosed = !mData.get(position).isChoosed;
+	public void clear() {
+		
+		ContentValues updateRowValue = new ContentValues();
+		updateRowValue.put("isChoosed", 0);
+		
+		mDBmanager.update(updateRowValue, "isChoosed=1", null);
+		
 		notifyDataSetChanged();
 	}
-	
+
+	// 아이템이 선택 되었을 때 값 변경 및 뷰 새로그리기
+	public void itemChoosed(int position) {
+		
+		ContentValues updateRowValue = new ContentValues();
+		
+		if(mDBmanager.getIsChoosed(position))
+			updateRowValue.put("isChoosed", 0);
+		else 
+			updateRowValue.put("isChoosed", 1);
+		
+		mDBmanager.update(updateRowValue, "_id="+getID(position), null);
+		
+		notifyDataSetChanged();
+	}
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		return mData.size();
+		return mDBmanager.getCount();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return mData.get(position);
+		
+		String[] columns = new String[]{"name", "expirationDate", "memo"};
+		Cursor mCursor = mDBmanager.query(columns, "_id="+getID(position), null, null, null, null);
+		mCursor.moveToFirst();
+
+		Ingredient ingredient = new Ingredient();
+		ingredient.name = mCursor.getString(0);
+		ingredient.expirationDate = mCursor.getString(1);
+		ingredient.memo = mCursor.getString(2);
+		
+		mCursor.close();
+		
+		return ingredient;
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 
 		View itemLayout = convertView;
 		ViewHolder viewHolder = null;
 		
-		if(itemLayout==null){
-			itemLayout = mLayoutInflater.inflate(R.layout.ingredient_main, null);
-			
+		if (itemLayout == null) {
+			itemLayout = mLayoutInflater
+					.inflate(R.layout.ingredient_main, null);
+
 			viewHolder = new ViewHolder();
-			viewHolder.name = (TextView)itemLayout.findViewById(R.id.name_ingredient);
-			viewHolder.expiration = (TextView)itemLayout.findViewById(R.id.expiration_ingredient);
-			
+			viewHolder.name = (TextView) itemLayout.findViewById(R.id.name_ingredient);
+			viewHolder.expiration = (TextView) itemLayout.findViewById(R.id.expiration_ingredient);
+
 			itemLayout.setTag(viewHolder);
+		} else {
+			viewHolder = (ViewHolder) itemLayout.getTag();
 		}
-		else{
-			viewHolder = (ViewHolder)itemLayout.getTag();
-		}
 		
-		if(mData.get(position).isChoosed) itemLayout.setBackgroundColor(Color.rgb(255,140,90));
-		else itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
+		if(mDBmanager.getIsChoosed(position))
+			itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
+		else
+			itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
 		
-		viewHolder.name.setText(mData.get(position).name);
-		viewHolder.expiration.setText(mData.get(position).expirationDate);
+
+		Cursor mCursor = mDBmanager.getAll();
+		mCursor.moveToPosition(position);
 		
+		Ingredient tmp = new Ingredient();
+		tmp.expirationDate = mCursor.getString(2);
+		tmp.stringToDate();
+		
+		viewHolder.name.setText(mCursor.getString(1));
+		viewHolder.expiration.setText(Ingredient.dateFormat.format(tmp.date));
+		
+		mCursor.close();
+
 		return itemLayout;
 	}
-
+	
+	private int getID(int position){
+		
+		Cursor a = mDBmanager.query(new String[]{"_id"}, null, null, null, null, null);
+		a.moveToPosition(position);
+		
+		return a.getInt(0);
+	}
 }

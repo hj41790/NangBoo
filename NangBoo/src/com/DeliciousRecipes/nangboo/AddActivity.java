@@ -24,10 +24,8 @@ public class AddActivity extends Activity  {
 	SimpleDateFormat format;
 	Button date_button;
 
-	/*
-	 *  수정해야돼
-	 *  OK누르면 재료 추가 완료되도록!
-	 */
+	/**/
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
