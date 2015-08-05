@@ -153,8 +153,13 @@ public class BaseAdapter_main extends BaseAdapter {
 
 		Cursor mCursor = mDBmanager.getAll();
 		mCursor.moveToPosition(position);
+		
+		Ingredient tmp = new Ingredient();
+		tmp.expirationDate = mCursor.getString(2);
+		tmp.stringToDate();
+		
 		viewHolder.name.setText(mCursor.getString(1));
-		viewHolder.expiration.setText(mCursor.getString(2));
+		viewHolder.expiration.setText(Ingredient.dateFormat.format(tmp.date));
 		
 		mCursor.close();
 

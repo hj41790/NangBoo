@@ -3,14 +3,12 @@ package com.DeliciousRecipes.nangboo;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -20,6 +18,9 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	
+	final static int MODIFY_ACTIVITY = 0;
+	final static int ADD_ACTIVITY = 1;
 
 	ListView mListView = null;
 	BaseAdapter_main mAdapter = null;
@@ -56,17 +57,22 @@ public class MainActivity extends Activity {
 		// 리스트뷰 생성 및 아이템 선택 리스너 설정
 		mAdapter = new BaseAdapter_main(this);
 
+		
+		/*
 		mDBmanager.delete(null, null);
 
 		for (int i = 0; i < 50; i++) {
 			Ingredient ingredient = new Ingredient();
 			ingredient.name = "재료" + i;
-			ingredient.expirationDate = "15-08-1" + i;
+			ingredient.expirationDate = "2015.08." + (int)((Math.random()*100)%20+1);
 			ingredient.memo = i + "번째";
 
 			mAdapter.add(ingredient);
 		}
-
+		*/
+		
+		
+		
 		mListView = (ListView) findViewById(R.id.listview_main);
 		mListView.setDivider(new ColorDrawable(Color.rgb(240, 240, 210)));
 		mListView.setDividerHeight(2);
@@ -84,9 +90,17 @@ public class MainActivity extends Activity {
 					mAdapter.itemChoosed(a);
 				} else {
 					
+					Ingredient tmp = (Ingredient) mAdapter.getItem(a);
+					
+					Bundle bundleData = new Bundle();
+					bundleData.putString("NAME", tmp.name);
+					bundleData.putString("EXPIRATION", tmp.expirationDate);
+					bundleData.putString("MEMO", tmp.memo);
+					bundleData.putInt("POSITION", a);
+
 					Intent intent = new Intent(MainActivity.this, ModifyActivity.class);
-					startActivity(intent);
-					//createItemSelectedPopup(a);
+					intent.putExtra("INGREDIENT", bundleData);
+					startActivityForResult(intent, MODIFY_ACTIVITY);
 				}
 			}
 		});
@@ -125,13 +139,14 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				if (isClicked_chooseButton) { // 삭제모드
-					createDeletePopup();
+					createDeleteDialog();
 				} else { // 정렬모드
 
 				}
 			}
 		});
 
+		//재료추가 버튼리스너 설정
 		addIngredient.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -139,13 +154,47 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 
 				Intent intent = new Intent(MainActivity.this, AddActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, ADD_ACTIVITY);
 
 			}
 		});
 	}
 
-	private void createDeletePopup() {
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch(requestCode){
+			case MODIFY_ACTIVITY :
+				if(resultCode==RESULT_OK){
+					
+					Bundle inputData = data.getBundleExtra("RESULT_FROM_MODIFY_ACTIVITY");
+					
+					Ingredient modifyValue = new Ingredient();
+
+					modifyValue.name = inputData.getString("NAME");
+					modifyValue.expirationDate = inputData.getString("EXPIRATION");
+					modifyValue.memo = inputData.getString("MEMO");
+					
+					mAdapter.modify(inputData.getInt("POSITION"), modifyValue);
+				}
+			case ADD_ACTIVITY :
+				if (resultCode == RESULT_OK) {
+					Bundle inputData = data.getBundleExtra("RESULT_FROM_ADD_ACTIVITY");
+
+					Ingredient modifyValue = new Ingredient();
+
+					modifyValue.name = inputData.getString("NAME");
+					modifyValue.expirationDate = inputData.getString("EXPIRATION");
+					modifyValue.memo = inputData.getString("MEMO");
+					
+					mAdapter.add(modifyValue);
+				}
+		
+		}		
+		
+		
+	}
+
+	private void createDeleteDialog() {
 
 		mDialog = new CustomDialog(this);
 

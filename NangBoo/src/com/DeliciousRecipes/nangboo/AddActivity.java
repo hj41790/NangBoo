@@ -5,24 +5,28 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
 //import java.sql.Date;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class AddActivity extends Activity  {
 
 	SimpleDateFormat format;
+	Calendar cal;
+
+	EditText name;
 	Button date_button;
+	EditText memo;
+	
 	/*
 	 * 수정해야돼
 	 * 2. 메모 입력하는 란 추가
@@ -33,26 +37,51 @@ public class AddActivity extends Activity  {
 		setContentView(R.layout.activity_add);
 
 		//현재날짜 date_button에 띄우고 시작하기
-		final Calendar cal = Calendar.getInstance();
-		format = new SimpleDateFormat("yyyy.MM.dd");
-		date_button = (Button)findViewById(R.id.expiration_date_button);
+		cal = Calendar.getInstance();
 		Date now = new Date();
+		format = new SimpleDateFormat("yyyy.MM.dd");
+		
+		// 뷰 불러오기
+		name = (EditText)findViewById(R.id.product_name_edittext);
+		date_button = (Button)findViewById(R.id.expiration_date_button);
+		memo = (EditText)findViewById(R.id.memo_add);
+		
 		date_button.setText(format.format(now));
 		
 		/* 리스너 추가*/
-		//버튼 리스너
+		// 추가 버튼 리스너
 		Button okButton = (Button)findViewById(R.id.ok_button);
 		okButton.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(AddActivity.this, "OK button is clicked.", Toast.LENGTH_LONG).show();
+				
+				Bundle outputData = new Bundle();
+				
+				outputData.putString("NAME", name.getText().toString());
+				outputData.putString("EXPIRATION", date_button.getText().toString());
+				outputData.putString("MEMO", memo.getText().toString());
+				
+				Intent intent = new Intent();
+				intent.putExtra("RESULT_FROM_ADD_ACTIVITY", outputData);
+				
+				setResult(RESULT_OK, intent);
+				finish();
+				
 			}
 		});
 
+		
+		
+		// 백, 취소버튼 리스너
 		Button backButton = (Button)findViewById(R.id.back_button);
+			
 		backButton.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
+				
+				Intent intent = new Intent();
+				
+				setResult(RESULT_CANCELED, intent);
 				finish();
 			}
 		});
@@ -78,7 +107,9 @@ public class AddActivity extends Activity  {
 						}
 				};
 				//만들어서 show
-				DatePickerDialog datePickerDialog = new DatePickerDialog(AddActivity.this, datePickerDialogListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+				DatePickerDialog datePickerDialog = new DatePickerDialog(AddActivity.this, 
+																		datePickerDialogListener, cal.get(Calendar.YEAR), 
+																		cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
 				datePickerDialog.show();
 			}
 		});
@@ -86,26 +117,5 @@ public class AddActivity extends Activity  {
 	
 	}//onCreate 끝!
 
-	
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.add, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	
 	
 }
