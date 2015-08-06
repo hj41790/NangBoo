@@ -23,30 +23,24 @@ public class MainActivity extends Activity {
 	
 	final static int MODIFY_ACTIVITY = 0;
 	final static int ADD_ACTIVITY = 1;
-
-	ListView mListView = null;
-	BaseAdapter_main mAdapter = null;
-	ArrayList<Ingredient> mData = null;
-
-	Button chooseIngredient, multiple, addIngredient, searchingRecipe,
-			bookmark, setting;
-
-	boolean isClicked_chooseButton = false;
-
-	CustomDialog mDialog = null;
-
+	
 	/* 데이터베이스 구축 */
 	public IngredientDBManager mDBmanager = null;
 
-	/* 팝업 윈도우 관련 변수 */
-	PopupWindow popupWindow = null;
-	View popupLayout = null;
+	ListView 				mListView = null;
+	BaseAdapter_main 		mAdapter = null;
+	ArrayList<Ingredient> 	mData = null;
 
-	Button modifyBtn, closeBtn;
-	EditText name, expiration, memo;
+	Button  chooseIngredient, multiple, addIngredient, 
+			searchingRecipe, bookmark, setting;
 
-	boolean isModifyBtnSelected;
-	int position;
+	boolean isClicked_chooseButton = false;
+	boolean isModifyBtnSelected = false;
+	
+	int position, selected;
+	CustomDialog mDialog = null;
+	AlertDialog.Builder builder = null;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -150,50 +144,13 @@ public class MainActivity extends Activity {
 
 		//재료추가 버튼리스너 설정
 		addIngredient.setOnClickListener(new View.OnClickListener() {
-			int selected;
 			@Override
 			public void onClick(View v) {
-				//재료 선택 방식 선택하는 팝업창
-				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-				builder.setTitle("추가 방법 선택");
-				final String items[] = {"QR코드 인식", "직접 입력"};
-				builder.setSingleChoiceItems(items, 0,
-						new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								selected = which;
-							}
-						}).setPositiveButton("확인",
-								new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										//확인 버튼 터치
-										//여기서 선택한 값을 넘기면됨
-										if(selected==0)//QR코드 인식
-											;
-										else if(selected==1)//직접 입력
-										{
-											dialog.dismiss();
-											Intent intent = new Intent(MainActivity.this, AddActivity.class);
-											startActivity(intent);						
-										}
-									}
-								}).setNegativeButton("취소", 
-										new DialogInterface.OnClickListener() {
-											@Override
-											public void onClick(DialogInterface dialog, int which) {
-												//취소 버튼 터치
-												dialog.dismiss();
-											}
-										});//buildr.stSingleChoiceItems 끝
-				builder.show();
-										
-				
-				
-				
+				createAddDialog();
 			}
 		});//재료추가 끝
 		
+		//설정 버튼리스너 설정
 		setting.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -218,6 +175,8 @@ public class MainActivity extends Activity {
 					modifyValue.memo = inputData.getString("MEMO");
 					
 					mAdapter.modify(inputData.getInt("POSITION"), modifyValue);
+					
+					break;
 				}
 			case ADD_ACTIVITY :
 				if (resultCode == RESULT_OK) {
@@ -230,11 +189,55 @@ public class MainActivity extends Activity {
 					modifyValue.memo = inputData.getString("MEMO");
 					
 					mAdapter.add(modifyValue);
+					
+					break;
 				}
 		
 		}		
 		
 		
+	}
+	
+	private void createAddDialog(){
+		
+		//재료 선택 방식 선택하는 팝업창
+		builder = new AlertDialog.Builder(MainActivity.this);
+		
+		builder.setTitle("추가 방법 선택");
+		String items[] = {"QR코드 인식", "직접 입력"};
+		
+		builder.setSingleChoiceItems(items, 0,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						selected = which;
+					}
+				})
+				.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// 확인 버튼 터치
+						// 여기서 선택한 값을 넘기면됨
+						if (selected == 0){ // QR코드 인식
+							;
+						}
+						else if (selected == 1) // 직접 입력
+						{
+							dialog.dismiss();
+							Intent intent = new Intent(MainActivity.this, AddActivity.class);
+							startActivityForResult(intent, ADD_ACTIVITY);
+						}
+					}
+				})
+				.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// 취소 버튼 터치
+						dialog.dismiss();
+					}
+				});
+		
+		builder.show();
 	}
 
 	private void createDeleteDialog() {

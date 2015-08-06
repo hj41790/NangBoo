@@ -81,7 +81,7 @@ public class ModifyActivity extends Activity{
 				intent.putExtra("RESULT_FROM_MODIFY_ACTIVITY", outputData);
 				setResult(RESULT_OK, intent);
 				
-				finish();	//수정사항도 같이 전달해야해
+				finish();
 			}
 			
 		});
@@ -98,7 +98,6 @@ public class ModifyActivity extends Activity{
 					expiration.setEnabled(true);
 				}
 				else{
-					//다이얼로그박스를 띄우고 수정의사를 확인 할 것
 					createModifyDialog();
 					
 					modify.setText("수정");
@@ -111,9 +110,6 @@ public class ModifyActivity extends Activity{
 			}
 			
 		});
-		
-		
-		
 		
 		expiration.setOnClickListener(new OnClickListener(){
 			@Override
@@ -140,8 +136,8 @@ public class ModifyActivity extends Activity{
 				};
 				//만들어서 show
 				DatePickerDialog datePickerDialog = new DatePickerDialog(ModifyActivity.this, 
-																		datePickerDialogListener, cal.get(Calendar.YEAR), 
-																		cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+																		 datePickerDialogListener, cal.get(Calendar.YEAR), 
+																		 cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
 				datePickerDialog.show();
 			}
 		});
@@ -160,14 +156,12 @@ public class ModifyActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 
-				//변경사항 저장해야됨
-
+				//변경사항 저장
 				ingredient.name = name.getText().toString();
 				ingredient.expirationDate = expiration.getText().toString();
 				ingredient.memo = memo.getText().toString();
 				
-				Toast.makeText(ModifyActivity.this, "수정되었습니다.",
-							Toast.LENGTH_SHORT).show();
+				Toast.makeText(ModifyActivity.this, "수정되었습니다.", Toast.LENGTH_SHORT).show();
 
 				mDialog.dismiss();
 			}

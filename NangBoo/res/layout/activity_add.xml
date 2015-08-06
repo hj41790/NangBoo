@@ -119,6 +119,8 @@
 			android:layout_marginTop="10dp"
 			android:layout_marginLeft="40dp"
 			android:layout_marginRight="40dp"
+			android:paddingLeft="8dp"
+			android:textSize="15dp"
 			android:layout_below="@id/memo_textview_add"
             />
     </RelativeLayout>
