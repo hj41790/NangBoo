@@ -5,11 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
 //import java.sql.Date;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,23 @@ public class AddActivity extends Activity  {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add);
+		
+		//QRCode 인식
+		Intent intent = getIntent();
+		Boolean qr = intent.getExtras().getBoolean("qrcode");
+		if(qr == true){
+			Intent QRintent = new Intent("com.google.zxing.client.android.SCAN");
+			QRintent.putExtra("SCAN_MODE", "BAR_CODE_MODE");
+			try{
+				startActivityForResult(QRintent, 0);
+			}catch(ActivityNotFoundException e){
+				new AlertDialog.Builder(AddActivity.this)
+				.setTitle("QR Scanner not found.")
+				.setMessage("Please install QR code scanner")
+				.setPositiveButton("OK",null)
+				.show();
+			}
+		}
 
 		//현재날짜 date_button에 띄우고 시작하기
 		cal = Calendar.getInstance();
@@ -118,6 +136,28 @@ public class AddActivity extends Activity  {
 
 	
 	}//onCreate 끝!
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent intent){
+		if(requestCode == 0){
+			if(resultCode == RESULT_OK){
+				String barcode = intent.getStringExtra("SCAN_RESULT");
+				//result[0] = name || result[1] = dataString
+				String[] result = barcode.split("#");
+				
+				//이름 바꾸기
+				name.setText(result[0]);
+				//날짜 바꾸기
+				try {
+					Date d = format.parse(result[1]);
+					date_button.setText(format.format(d));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	
 	
 }

@@ -219,12 +219,16 @@ public class MainActivity extends Activity {
 						// 확인 버튼 터치
 						// 여기서 선택한 값을 넘기면됨
 						if (selected == 0){ // QR코드 인식
+							Intent intent = new Intent(MainActivity.this, AddActivity.class);
+							intent.putExtra("qrcode", true);
+							startActivityForResult(intent, ADD_ACTIVITY);
 							;
 						}
 						else if (selected == 1) // 직접 입력
 						{
 							dialog.dismiss();
 							Intent intent = new Intent(MainActivity.this, AddActivity.class);
+							intent.putExtra("qrcode", false);
 							startActivityForResult(intent, ADD_ACTIVITY);
 						}
 					}
