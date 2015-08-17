@@ -222,7 +222,6 @@ public class MainActivity extends Activity {
 							Intent intent = new Intent(MainActivity.this, AddActivity.class);
 							intent.putExtra("qrcode", true);
 							startActivityForResult(intent, ADD_ACTIVITY);
-							;
 						}
 						else if (selected == 1) // 직접 입력
 						{
