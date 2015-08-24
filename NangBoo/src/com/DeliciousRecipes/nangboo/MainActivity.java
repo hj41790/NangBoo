@@ -53,22 +53,7 @@ public class MainActivity extends Activity {
 		// 리스트뷰 생성 및 아이템 선택 리스너 설정
 		mAdapter = new BaseAdapter_main(this);
 
-		
-		/*
-		mDBmanager.delete(null, null);
 
-		for (int i = 0; i < 50; i++) {
-			Ingredient ingredient = new Ingredient();
-			ingredient.name = "재료" + i;
-			ingredient.expirationDate = "2015.08." + (int)((Math.random()*100)%20+1);
-			ingredient.memo = i + "번째";
-
-			mAdapter.add(ingredient);
-		}
-		*/
-		
-		
-		
 		mListView = (ListView) findViewById(R.id.listview_main);
 		mListView.setDivider(new ColorDrawable(Color.rgb(240, 240, 210)));
 		mListView.setDividerHeight(2);
@@ -137,7 +122,7 @@ public class MainActivity extends Activity {
 				if (isClicked_chooseButton) { // 삭제모드
 					createDeleteDialog();
 				} else { // 정렬모드
-
+					createSortDialog();
 				}
 			}
 		});
@@ -240,6 +225,49 @@ public class MainActivity extends Activity {
 					}
 				});
 		
+		builder.show();
+	}
+
+	private void createSortDialog() {
+
+		// 재료 선택 방식 선택하는 팝업창
+		builder = new AlertDialog.Builder(MainActivity.this);
+
+		builder.setTitle("정렬 방법 선택");
+		String items[] = { "이름순", "유통기한 임박순", "등록순" };
+
+		builder.setSingleChoiceItems(items, 0,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						selected = which;
+					}
+				})
+				.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// 확인 버튼 터치
+						// 여기서 선택한 값을 넘기면됨
+
+						if (selected == 0) { // 이름순
+						} 
+						else if (selected == 1) { // 유통기한 임박순
+						} 
+						else if (selected == 2) { // 등록순
+						}
+
+						dialog.dismiss();
+
+					}
+				})
+				.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// 취소 버튼 터치
+						dialog.dismiss();
+					}
+				});
+
 		builder.show();
 	}
 
