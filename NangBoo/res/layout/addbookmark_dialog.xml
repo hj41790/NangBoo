@@ -11,17 +11,18 @@
         android:padding="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         
        <TextView android:id="@+id/text_addbookmark"
   	      	android:layout_width="wrap_content"
   	      	android:layout_height="wrap_content"
+  	      	android:layout_marginLeft="10dp"
+  	      	android:layout_marginBottom="5dp"
 			android:text="제목"/>
        
        <EditText android:id="@+id/name_addbookmark"
-           android:layout_width="0dp"
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_weight="1"
            android:hint="제목을 입력하세요."/>
         
     </LinearLayout>
