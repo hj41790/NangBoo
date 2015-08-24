@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:key="setting"
+    android:title="설정"
+    >
+
+    
+ <Preference
+	android:key="setting_2_2"
+	android:title="항목2"
+	android:summary="항목2 입니다."
+	android:defaultValue="true"/>
+
+</PreferenceScreen>
