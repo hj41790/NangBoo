@@ -16,7 +16,11 @@
     <string name="expiration_date_setting">유통기한</string>
     <string name="back">BACK</string>
     <string name="ok">OK</string>
-    
     <string name="title_activity_modify">ModifyActivity</string>
+    <string name="title_activity_abcd">AbcdActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_noti">NotiActivity</string>
+    <string name="onoff_text_noti">알림 설정</string>
+    <string name="title_activity_setting_test">SettingTestActivity</string>
 
 </resources>

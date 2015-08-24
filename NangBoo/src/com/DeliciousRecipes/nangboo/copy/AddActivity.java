@@ -1,10 +1,9 @@
-package com.DeliciousRecipes.nangboo;
+package com.DeliciousRecipes.nangboo.copy;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 
 //import java.sql.Date;
 import android.app.Activity;
@@ -18,6 +17,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.DeliciousRecipes.nangboo.R;
 
 public class AddActivity extends Activity  {
 
