@@ -24,6 +24,10 @@ public class MainActivity extends Activity {
 	final static int MODIFY_ACTIVITY = 0;
 	final static int ADD_ACTIVITY = 1;
 	
+	public static final int SORT_NAME = 0;
+	public static final int SORT_DATE = 1;
+	public static final int SORT_REGISTER = 2;
+	
 	/* 데이터베이스 구축 */
 	public IngredientDBManager mDBmanager = null;
 
@@ -250,10 +254,13 @@ public class MainActivity extends Activity {
 						// 여기서 선택한 값을 넘기면됨
 
 						if (selected == 0) { // 이름순
+							mAdapter.sort(SORT_NAME);
 						} 
 						else if (selected == 1) { // 유통기한 임박순
+							mAdapter.sort(SORT_DATE);
 						} 
 						else if (selected == 2) { // 등록순
+							mAdapter.sort(SORT_REGISTER);
 						}
 
 						dialog.dismiss();
