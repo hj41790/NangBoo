@@ -161,7 +161,6 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent(MainActivity.this, SearchingActivity.class);
 				intent.putExtra("SEARCHING_INGREDIENT", bundleData);
 				startActivity(intent);
-    	 
 	         }
 	      });
 		
@@ -271,15 +270,10 @@ public class MainActivity extends Activity {
 						// 확인 버튼 터치
 						// 여기서 선택한 값을 넘기면됨
 
-						if (selected == 0) { // 이름순
-							mAdapter.sort(SORT_NAME);
-						} 
-						else if (selected == 1) { // 유통기한 임박순
-							mAdapter.sort(SORT_DATE);
-						} 
-						else if (selected == 2) { // 등록순
-							mAdapter.sort(SORT_REGISTER);
-						}
+						if (selected == 0) mAdapter.sort(SORT_NAME); 			// 이름순
+						else if (selected == 1) mAdapter.sort(SORT_DATE);		// 유통기한 임박순
+						else if (selected == 2)mAdapter.sort(SORT_REGISTER);	// 등록순
+						else mAdapter.sort(SORT_NAME);							// 아무것도 터치하지 않은 경우 이름순
 
 						dialog.dismiss();
 

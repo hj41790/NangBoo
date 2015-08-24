@@ -43,24 +43,23 @@ public class SettingActivity extends Activity {
 		listView.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent;
 				switch(position)
 				{
-				case 0 : //알림
-					intent = new Intent(SettingActivity.this, NotiActivity.class);
-					startActivity(intent);
-					break;
-				case 1 : //테마
-					Toast.makeText(getApplicationContext(), "테마", Toast.LENGTH_SHORT).show();
-					break;
-				case 2 : //글자크기
-					Toast.makeText(getApplicationContext(), "글자크기", Toast.LENGTH_SHORT).show();
-					break;
-				case 3 : //버전
-					Toast.makeText(getApplicationContext(), "버전", Toast.LENGTH_SHORT).show();
-					break;
+					case 0 : //알림
+						intent = new Intent(SettingActivity.this, NotiActivity.class);
+						startActivity(intent);
+						break;
+					case 1 : //테마
+						Toast.makeText(getApplicationContext(), "테마", Toast.LENGTH_SHORT).show();
+						break;
+					case 2 : //글자크기
+						Toast.makeText(getApplicationContext(), "글자크기", Toast.LENGTH_SHORT).show();
+						break;
+					case 3 : //버전
+						Toast.makeText(getApplicationContext(), "버전", Toast.LENGTH_SHORT).show();
+						break;
 				}
 			}
 			

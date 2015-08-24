@@ -2,19 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@color/white">
+    android:orientation="vertical" >
     
     <LinearLayout
-        android:id="@+id/action_bar_searching"
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="end"
         android:background="@color/yellow"
         android:orientation="horizontal" >
-
         <Button
-            android:id="@+id/back_button_searching"
+            android:id="@+id/back_button_webview"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
@@ -27,30 +25,28 @@
             android:layout_gravity="fill_horizontal"
             android:layout_weight="1"
             />
-
-    </LinearLayout>
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/searching_text"
-        android:textSize="17dp"/>
-    
-    <EditText android:id="@+id/searching_bar"
+        <Button
+            android:id="@+id/add_bookmark_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:background="@color/yellow"
+            android:text="즐겨찾기 추가" />
+	</LinearLayout>
+	
+	<ProgressBar android:id="@+id/progressBar" 
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="40dp"
-        android:paddingLeft="8dp"
-        android:textSize="20dp"
-        android:background="@color/yellow" />
-    
-    <Button android:id="@+id/searching_button"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="검색"/>
+        android:background="@color/white"
+        android:max="100"
+        android:progress="5"
+        android:layout_gravity="center_horizontal"/>
+	
+    <WebView android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>"
+    
 
 </LinearLayout>

@@ -1,7 +1,11 @@
 package com.DeliciousRecipes.nangboo;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,6 +47,31 @@ public class SearchingActivity extends Activity{
 
 			@Override
 			public void onClick(View v) {	
+				String addURL = "";
+	            // TODO Auto-generated method stub
+	            try {
+	               addURL = URLEncoder.encode (searchingBar.getText().toString(), "UTF-8");
+	            } catch (UnsupportedEncodingException e) {
+	               // TODO Auto-generated catch block
+	               e.printStackTrace();
+	            }
+	            String recipeSearchingURL = "http://allrecipes.kr/m/recipes/search/list?text=" 
+	                                 + addURL;
+	            
+				// 레시피 검색 url로 이동
+//				Uri uri = Uri.parse(recipeSearchingURL);
+//				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//				startActivity(intent);
+				
+				Bundle bundleData = new Bundle();
+				bundleData.putString("URL", recipeSearchingURL);
+
+				Intent intent = new Intent(SearchingActivity.this, WebviewActivity.class);
+				intent.putExtra("SEARCHING_URL", bundleData);
+				startActivity(intent);
+				
+				
+				
 			}
 			
 		});
