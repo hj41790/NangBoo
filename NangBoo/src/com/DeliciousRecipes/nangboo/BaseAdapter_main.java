@@ -13,16 +13,25 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class BaseAdapter_main extends BaseAdapter {
-
+	
+	public static final int SORT_NAME = 0;
+	public static final int SORT_DATE = 1;
+	public static final int SORT_REGISTER = 2;
+	
+	String[] ORDER_BY = new String[]{"name asc", "expirationDate asc", "_id asc"};
+	
 	Context mContext = null;
 	LayoutInflater mLayoutInflater = null;
 	IngredientDBManager mDBmanager = null;
 	
+	int sort_type;
+	
 	public BaseAdapter_main(Context context) {
 		mContext = context;
 		mLayoutInflater = LayoutInflater.from(mContext);
-		
 		mDBmanager = IngredientDBManager.getInstance(mContext);	
+		
+		sort_type = SORT_REGISTER;
 	}
 
 	// 재료 추가
@@ -43,7 +52,7 @@ public class BaseAdapter_main extends BaseAdapter {
 	public int delete() {
 		
 		Cursor mCursor = mDBmanager.query(  new String[]{"isChoosed"},
-											null, null, null, null, null);
+											null, null, null, null, ORDER_BY[sort_type]);
 		
 		int count=0;
 		
@@ -108,7 +117,7 @@ public class BaseAdapter_main extends BaseAdapter {
 	public Object getItem(int position) {
 		
 		String[] columns = new String[]{"name", "expirationDate", "memo"};
-		Cursor mCursor = mDBmanager.query(columns, "_id="+getID(position), null, null, null, null);
+		Cursor mCursor = mDBmanager.query(columns, "_id="+getID(position), null, null, null, ORDER_BY[sort_type]);
 		mCursor.moveToFirst();
 
 		Ingredient ingredient = new Ingredient();
@@ -141,7 +150,8 @@ public class BaseAdapter_main extends BaseAdapter {
 			viewHolder.expiration = (TextView) itemLayout.findViewById(R.id.expiration_ingredient);
 
 			itemLayout.setTag(viewHolder);
-		} else {
+		} 
+		else {
 			viewHolder = (ViewHolder) itemLayout.getTag();
 		}
 		
@@ -151,7 +161,7 @@ public class BaseAdapter_main extends BaseAdapter {
 			itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
 		
 
-		Cursor mCursor = mDBmanager.getAll();
+		Cursor mCursor = mDBmanager.getAll(ORDER_BY[sort_type]);
 		mCursor.moveToPosition(position);
 		
 		Ingredient tmp = new Ingredient();
@@ -168,9 +178,28 @@ public class BaseAdapter_main extends BaseAdapter {
 	
 	private int getID(int position){
 		
-		Cursor a = mDBmanager.query(new String[]{"_id"}, null, null, null, null, null);
+		Cursor a = mDBmanager.query(new String[]{"_id"}, null, null, null, null, ORDER_BY[sort_type]);
 		a.moveToPosition(position);
 		
 		return a.getInt(0);
 	}
+	
+	public void sort(int type){
+		sort_type = type;
+		notifyDataSetChanged();
+	}
+	
+	public String ingredientURL(){
+	      String URL = "";
+	      
+	      Cursor mCursor = mDBmanager.query(new String[]{"name"}, "isChoosed=1", null, null, null, ORDER_BY[sort_type]);
+	      
+	      while(mCursor.moveToNext()){
+	         URL += mCursor.getString(0) + " ";
+	      }
+	      
+	      mCursor.close();
+	      
+	      return URL;
+	   }
 }

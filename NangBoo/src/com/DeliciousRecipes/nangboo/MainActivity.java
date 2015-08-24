@@ -1,5 +1,7 @@
 package com.DeliciousRecipes.nangboo;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -9,6 +11,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +26,10 @@ public class MainActivity extends Activity {
 	
 	final static int MODIFY_ACTIVITY = 0;
 	final static int ADD_ACTIVITY = 1;
+	
+	public static final int SORT_NAME = 0;
+	public static final int SORT_DATE = 1;
+	public static final int SORT_REGISTER = 2;
 	
 	/* 데이터베이스 구축 */
 	public IngredientDBManager mDBmanager = null;
@@ -53,22 +60,7 @@ public class MainActivity extends Activity {
 		// 리스트뷰 생성 및 아이템 선택 리스너 설정
 		mAdapter = new BaseAdapter_main(this);
 
-		
-		/*
-		mDBmanager.delete(null, null);
 
-		for (int i = 0; i < 50; i++) {
-			Ingredient ingredient = new Ingredient();
-			ingredient.name = "재료" + i;
-			ingredient.expirationDate = "2015.08." + (int)((Math.random()*100)%20+1);
-			ingredient.memo = i + "번째";
-
-			mAdapter.add(ingredient);
-		}
-		*/
-		
-		
-		
 		mListView = (ListView) findViewById(R.id.listview_main);
 		mListView.setDivider(new ColorDrawable(Color.rgb(240, 240, 210)));
 		mListView.setDividerHeight(2);
@@ -137,7 +129,7 @@ public class MainActivity extends Activity {
 				if (isClicked_chooseButton) { // 삭제모드
 					createDeleteDialog();
 				} else { // 정렬모드
-
+					createSortDialog();
 				}
 			}
 		});
@@ -158,6 +150,31 @@ public class MainActivity extends Activity {
 				startActivity(intent);
 			}
 		});//옵션 끝
+		
+		//레시피 검색 
+		searchingRecipe.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String addURL = "";
+				// TODO Auto-generated method stub
+				try {
+					addURL = URLEncoder.encode (mAdapter.ingredientURL(), "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String recipeSearchingURL = "http://allrecipes.kr/m/recipes/search/list?text=" 
+											+ addURL;
+				
+				//레시피 검색 url로 이동
+				Uri uri = Uri
+                        .parse(recipeSearchingURL);
+                  Intent intent = new Intent(Intent.ACTION_VIEW,
+                        uri);
+                  startActivity(intent);
+			}
+		});
 	}
 
 	@Override
@@ -222,7 +239,6 @@ public class MainActivity extends Activity {
 							Intent intent = new Intent(MainActivity.this, AddActivity.class);
 							intent.putExtra("qrcode", true);
 							startActivityForResult(intent, ADD_ACTIVITY);
-							;
 						}
 						else if (selected == 1) // 직접 입력
 						{
@@ -241,6 +257,52 @@ public class MainActivity extends Activity {
 					}
 				});
 		
+		builder.show();
+	}
+
+	private void createSortDialog() {
+
+		// 재료 선택 방식 선택하는 팝업창
+		builder = new AlertDialog.Builder(MainActivity.this);
+
+		builder.setTitle("정렬 방법 선택");
+		String items[] = { "이름순", "유통기한 임박순", "등록순" };
+
+		builder.setSingleChoiceItems(items, 0,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						selected = which;
+					}
+				})
+				.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// 확인 버튼 터치
+						// 여기서 선택한 값을 넘기면됨
+
+						if (selected == 0) { // 이름순
+							mAdapter.sort(SORT_NAME);
+						} 
+						else if (selected == 1) { // 유통기한 임박순
+							mAdapter.sort(SORT_DATE);
+						} 
+						else if (selected == 2) { // 등록순
+							mAdapter.sort(SORT_REGISTER);
+						}
+
+						dialog.dismiss();
+
+					}
+				})
+				.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// 취소 버튼 터치
+						dialog.dismiss();
+					}
+				});
+
 		builder.show();
 	}
 
@@ -278,5 +340,12 @@ public class MainActivity extends Activity {
 
 		mDialog.show();
 
+	}
+	
+	//URL 바꿔주는 function
+	private String encoding(String addURL, String ingredient) throws UnsupportedEncodingException
+	{
+		addURL += URLEncoder.encode(ingredient, "UTF-8");
+		return addURL;
 	}
 }

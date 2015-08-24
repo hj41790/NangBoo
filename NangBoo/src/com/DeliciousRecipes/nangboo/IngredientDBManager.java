@@ -107,9 +107,9 @@ public class IngredientDBManager extends SQLiteOpenHelper{
 								selectionArgs, groupBy, having, orderBy);
 	}
 	
-	public Cursor getAll(){
+	public Cursor getAll(String sort){
 		String[] columns = new String[]{"_id", "name", "expirationDate", "memo", "isChoosed"};
-		return getReadableDatabase().query(TABLE_INGREDIENT, columns, null, null, null, null, null);
+		return getReadableDatabase().query(TABLE_INGREDIENT, columns, null, null, null, null, sort);
 	}
 
 	public boolean getIsChoosed(int position){
