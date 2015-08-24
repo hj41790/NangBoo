@@ -50,6 +50,10 @@
             android:name=".SettingTestActivity"
             android:label="@string/title_activity_setting_test" >
         </activity>
+        <activity
+            android:name=".SearchingActivity"
+            android:label="@string/title_activity_searching" >
+        </activity>
     </application>
 
 </manifest>

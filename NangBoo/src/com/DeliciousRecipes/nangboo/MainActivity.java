@@ -154,21 +154,14 @@ public class MainActivity extends Activity {
 	         
 	         @Override
 	         public void onClick(View v) {
-	            String addURL = "";
-	            // TODO Auto-generated method stub
-	            try {
-	               addURL = URLEncoder.encode (mAdapter.ingredientURL(), "UTF-8");
-	            } catch (UnsupportedEncodingException e) {
-	               // TODO Auto-generated catch block
-	               e.printStackTrace();
-	            }
-	            String recipeSearchingURL = "http://allrecipes.kr/m/recipes/search/list?text=" 
-	                                 + addURL;
-	            
-				// 레시피 검색 url로 이동
-				Uri uri = Uri.parse(recipeSearchingURL);
-				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+				Bundle bundleData = new Bundle();
+				bundleData.putString("INGREDIENT", mAdapter.ingredientURL());
+
+				Intent intent = new Intent(MainActivity.this, SearchingActivity.class);
+				intent.putExtra("SEARCHING_INGREDIENT", bundleData);
 				startActivity(intent);
+    	 
 	         }
 	      });
 		
