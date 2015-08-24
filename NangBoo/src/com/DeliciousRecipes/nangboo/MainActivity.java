@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
 	public static final int SORT_NAME = 0;
 	public static final int SORT_DATE = 1;
 	public static final int SORT_REGISTER = 2;
+
 	
 	/* 데이터베이스 구축 */
 	public IngredientDBManager mDBmanager = null;

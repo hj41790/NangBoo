@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class IngredientDBManager extends SQLiteOpenHelper{
+
+	String[] ORDER_BY = new String[]{"name asc", "expirationDate asc", "_id asc"};
 	
 	static final String DB_INGREDIENT 		= "ingredient.db";
 	static final String TABLE_INGREDIENT 	= "ingredient";
@@ -112,10 +114,10 @@ public class IngredientDBManager extends SQLiteOpenHelper{
 		return getReadableDatabase().query(TABLE_INGREDIENT, columns, null, null, null, null, sort);
 	}
 
-	public boolean getIsChoosed(int position){
+	public boolean getIsChoosed(int position, int type){
 		
 		Cursor a = getReadableDatabase().query( TABLE_INGREDIENT, new String[]{"isChoosed"}, 
-									null, null, null, null, null);
+									null, null, null, null, ORDER_BY[type]);
 		
 		a.moveToPosition(position);
 		

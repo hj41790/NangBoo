@@ -1,7 +1,5 @@
 package com.DeliciousRecipes.nangboo;
 
-import java.util.ArrayList;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -98,7 +96,7 @@ public class BaseAdapter_main extends BaseAdapter {
 		
 		ContentValues updateRowValue = new ContentValues();
 		
-		if(mDBmanager.getIsChoosed(position))
+		if(mDBmanager.getIsChoosed(position, sort_type))
 			updateRowValue.put("isChoosed", 0);
 		else 
 			updateRowValue.put("isChoosed", 1);
@@ -155,7 +153,7 @@ public class BaseAdapter_main extends BaseAdapter {
 			viewHolder = (ViewHolder) itemLayout.getTag();
 		}
 		
-		if(mDBmanager.getIsChoosed(position))
+		if(mDBmanager.getIsChoosed(position, sort_type))
 			itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
 		else
 			itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
