@@ -1,4 +1,4 @@
-package com.DeliciousRecipes.nangboo;
+package com.DeliciousRecipes.nangboo.copy;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.DeliciousRecipes.nangboo.R;
 
 public class SettingActivity extends Activity {
 
