@@ -1,68 +1,77 @@
 package com.DeliciousRecipes.nangboo;
 
-import android.app.ListActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-/* 리스트뷰의 늪ㅍㅍㅍㅍㅍㅍㅍ*/
-
-
-public class SettingActivity extends ListActivity implements OnItemClickListener {
-
-//	ListView mListView = null;
-//	BaseAdapter_setting mAdapter = null;
+public class SettingActivity extends Activity {
 
 	final String[] items = new String[]{"알림", "테마", "글자 크기", "버전 및 개발진 정보"};
+	
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.activity_setting);
-
-//		setListAdapter((ListAdapter) new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, items));
+		setContentView(R.layout.activity_setting);
 		
-		ArrayAdapter<String> adapter;
-		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+		/* 버튼 리스터 : BACK 버튼만 */
+		Button backButton = (Button)findViewById(R.id.back_button);
+		backButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		
-		ListView list = (ListView)findViewById(R.id.list);
-		list.setAdapter(adapter);
+		/* 리스트뷰 list */
+		ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+		ListView listView = (ListView) findViewById(R.id.list);
+		listView.setAdapter(adapter);
 		
-		list.setOnItemClickListener(this);
-		
-	}
-	
-	
-	
-//	@Override
-//	protected void onListItemClick(ListView l, View v, int position, long id) {
-//		// TODO Auto-generated method stub
-//		super.onListItemClick(l, v, position, id);
-//	}
+		/* 리스트뷰 리스너 */
+		listView.setOnItemClickListener(new OnItemClickListener(){
 
-
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		Toast.makeText(this, items[position]+" is clicked.", Toast.LENGTH_LONG).show();
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intent;
+				switch(position)
+				{
+				case 0 : //알림
+					intent = new Intent(SettingActivity.this, NotiActivity.class);
+					startActivity(intent);
+					break;
+				case 1 : //테마
+					Toast.makeText(getApplicationContext(), "테마", Toast.LENGTH_SHORT).show();
+					break;
+				case 2 : //글자크기
+					Toast.makeText(getApplicationContext(), "글자크기", Toast.LENGTH_SHORT).show();
+					break;
+				case 3 : //버전
+					Toast.makeText(getApplicationContext(), "버전", Toast.LENGTH_SHORT).show();
+					break;
+				}
+			}
 			
+		});
+		
 	}
-
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.setting, menu);
+		getMenuInflater().inflate(R.menu.abcd, menu);
 		return true;
 	}
 

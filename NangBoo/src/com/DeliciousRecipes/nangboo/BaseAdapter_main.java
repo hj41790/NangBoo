@@ -179,11 +179,28 @@ public class BaseAdapter_main extends BaseAdapter {
 		Cursor a = mDBmanager.query(new String[]{"_id"}, null, null, null, null, ORDER_BY[sort_type]);
 		a.moveToPosition(position);
 		
-		return a.getInt(0);
+		int id = a.getInt(0);
+		a.close();
+		
+		return id;
 	}
 	
 	public void sort(int type){
 		sort_type = type;
 		notifyDataSetChanged();
+	}
+	
+	public String ingredientURL(){
+		String URL = "";
+		
+		Cursor mCursor = mDBmanager.query(new String[]{"name"}, "isChoosed=1", null, null, null, ORDER_BY[sort_type]);
+		
+		while(mCursor.moveToNext()){
+			URL += mCursor.getString(0) + " ";
+		}
+		
+		mCursor.close();
+		
+		return URL;
 	}
 }

@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:orientation="vertical"
-	tools:context="com.DeliciousRecipes.nangboo.SettingActivity" >
+    android:orientation="vertical"
+    tools:context="com.DeliciousRecipes.nangboo.NotiActivity" >
 
         <!--  액션바 대신에 LinearLayout! height는 40dp로 통일해주세용 -->
     
@@ -15,7 +15,7 @@
         android:background="@color/yellow"
         android:orientation="horizontal" >
         <Button
-            android:id="@+id/back_button"
+            android:id="@+id/back_button_noti"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
@@ -37,15 +37,35 @@
             android:text="" />
 	</LinearLayout>
 	
-	
     
-    <ListView 
-        android:id="@+id/list"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-      />
-    
-	
+        >
+        
+        <TextView
+            android:text="@string/onoff_text_noti"
+            android:id="@+id/onoff_textview_noti"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+            android:textSize="20dp"
+			android:textColor="@color/black"
+			android:layout_marginTop="40dp"
+         	android:layout_marginLeft="40dp"
+        />
+        
+    	<Switch
+    	    android:id="@+id/onoff_switch_noti"
+    	    android:layout_toRightOf="@id/onoff_textview_noti"
+    	    android:layout_width="match_parent"
+    	    android:layout_height="wrap_content"
+			android:layout_marginTop="40dp"
+    	    android:layout_marginRight="40dp"
+    	    android:checked="true"
+    	/>
     	
+    </RelativeLayout>
+    
+    
 </LinearLayout>

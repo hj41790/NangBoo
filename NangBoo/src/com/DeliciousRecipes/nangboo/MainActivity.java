@@ -1,22 +1,22 @@
 package com.DeliciousRecipes.nangboo;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -148,6 +148,30 @@ public class MainActivity extends Activity {
 				startActivity(intent);
 			}
 		});//옵션 끝
+		
+		//레시피 검색 
+	      searchingRecipe.setOnClickListener(new View.OnClickListener() {
+	         
+	         @Override
+	         public void onClick(View v) {
+	            String addURL = "";
+	            // TODO Auto-generated method stub
+	            try {
+	               addURL = URLEncoder.encode (mAdapter.ingredientURL(), "UTF-8");
+	            } catch (UnsupportedEncodingException e) {
+	               // TODO Auto-generated catch block
+	               e.printStackTrace();
+	            }
+	            String recipeSearchingURL = "http://allrecipes.kr/m/recipes/search/list?text=" 
+	                                 + addURL;
+	            
+				// 레시피 검색 url로 이동
+				Uri uri = Uri.parse(recipeSearchingURL);
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				startActivity(intent);
+	         }
+	      });
+		
 	}
 
 	@Override

@@ -101,7 +101,7 @@ public class AddActivity extends Activity {
       name = (EditText) findViewById(R.id.product_name_edittext);
       date_button = (Button) findViewById(R.id.expiration_date_button);
       memo = (EditText) findViewById(R.id.memo_add);
-
+      
       date_button.setText(format.format(now));
 
       /* 리스너 추가 */
@@ -178,7 +178,6 @@ public class AddActivity extends Activity {
 
    }// onCreate 끝!
 
-   @Override
    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
       if (requestCode == 0) {
          if (resultCode == RESULT_OK) {
