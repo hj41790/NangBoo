@@ -1,16 +1,11 @@
 package com.DeliciousRecipes.nangboo;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,7 +29,6 @@ public class MainActivity extends Activity {
 
 	ListView 				mListView = null;
 	BaseAdapter_main 		mAdapter = null;
-	ArrayList<Ingredient> 	mData = null;
 
 	Button  chooseIngredient, multiple, addIngredient, 
 			searchingRecipe, bookmark, setting;
@@ -144,6 +138,11 @@ public class MainActivity extends Activity {
 		setting.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
+				isClicked_chooseButton = false;
+				chooseIngredient.setBackgroundResource(R.drawable.btn_default_normal_holo_light);
+				mAdapter.clear();
+				
 				Intent intent = new Intent(MainActivity.this, SettingActivity.class);
 				startActivity(intent);
 			}
@@ -154,6 +153,9 @@ public class MainActivity extends Activity {
 	         
 	         @Override
 	         public void onClick(View v) {
+				isClicked_chooseButton = false;
+				chooseIngredient.setBackgroundResource(R.drawable.btn_default_normal_holo_light);
+				mAdapter.clear();
 
 				Bundle bundleData = new Bundle();
 				bundleData.putString("INGREDIENT", mAdapter.ingredientURL());
@@ -162,7 +164,21 @@ public class MainActivity extends Activity {
 				intent.putExtra("SEARCHING_INGREDIENT", bundleData);
 				startActivity(intent);
 	         }
-	      });
+		});
+	      
+		// 설정 버튼리스너 설정
+		bookmark.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				isClicked_chooseButton = false;
+				chooseIngredient.setBackgroundResource(R.drawable.btn_default_normal_holo_light);
+				mAdapter.clear();
+				
+				Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
+				startActivity(intent);
+			}
+		});// 옵션 끝
 		
 	}
 
@@ -222,6 +238,11 @@ public class MainActivity extends Activity {
 				.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+
+						isClicked_chooseButton = false;
+						chooseIngredient.setBackgroundResource(R.drawable.btn_default_normal_holo_light);					
+						mAdapter.clear();	// 선택한 재료들 선택취소
+						
 						// 확인 버튼 터치
 						// 여기서 선택한 값을 넘기면됨
 						if (selected == 0){ // QR코드 인식

@@ -2,51 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
     
     <LinearLayout
-        android:id="@+id/action_bar"
+        android:id="@+id/action_bar_modify"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="end"
         android:background="@color/yellow"
         android:orientation="horizontal" >
+
         <Button
-            android:id="@+id/back_button_webview"
+            android:id="@+id/back_button_bookmark"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:text="@string/back"
-            android:background="@color/yellow"
-            />
+            android:background="@color/yellow" />
+        
         <Space
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="fill_horizontal"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1" />
+
         <Button
-            android:id="@+id/add_bookmark_button"
+            android:id="@+id/modify_button_bookmark"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
             android:background="@color/yellow"
-            android:text="즐겨찾기 추가" />
-	</LinearLayout>
-	
-	<ProgressBar android:id="@+id/progressBar" 
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="7dp"
-        android:background="@color/white"
-        android:max="100"
-        android:progress="5"
-        android:layout_gravity="center_horizontal"/>
-	
-    <WebView android:id="@+id/webview"
+            android:text="편집" />
+
+    </LinearLayout>
+    
+    <ListView android:id="@+id/listview_bookmark"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_weight="1"
+        android:background="#FFFF96"/>
     
 
 </LinearLayout>

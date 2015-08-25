@@ -37,4 +37,8 @@ public class AddBookmark_Dialog extends Dialog{
 	public String getText(){
 		return editText.getText().toString();
 	}
+	
+	public void setHintText(String text){
+		editText.setHint(text);
+	}
 }

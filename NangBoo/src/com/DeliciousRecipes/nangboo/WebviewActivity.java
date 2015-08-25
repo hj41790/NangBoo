@@ -1,6 +1,7 @@
 package com.DeliciousRecipes.nangboo;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 public class WebviewActivity extends Activity{
 
+	BookmarkDBManager mDBmanager;
 	AddBookmark_Dialog mDialog;
 	
 	Button back, bookmark;
@@ -27,6 +29,8 @@ public class WebviewActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.searching_webview);
+
+		mDBmanager = BookmarkDBManager.getInstance(this);
 	    
 	    Intent intent = getIntent();
 		Bundle inputData = intent.getBundleExtra("SEARCHING_URL");
@@ -124,6 +128,12 @@ public class WebviewActivity extends Activity{
 			public void onClick(View v) {
 				
 				if(mDialog.isEditTextFilled()){
+					
+					ContentValues addRowValues = new ContentValues();
+					addRowValues.put("name", mDialog.getText());
+					addRowValues.put("URL", webview.getUrl());
+					
+					mDBmanager.insert(addRowValues);
 
 					mDialog.dismiss();
 					Toast.makeText(WebviewActivity.this, "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show();
