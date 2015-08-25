@@ -47,7 +47,7 @@ public class BookmarkActivity extends Activity {
 		// 리스트뷰 생성 및 아이템 선택 리스너 설정
 		mAdapter = new BaseAdapter_bookmark(this);
 
-		mListView = (ListView) findViewById(R.id.listview_bookmark);
+		mListView = (ListView) findViewById(R.id.listview_bookmark_activity);
 		mListView.setDivider(new ColorDrawable(Color.rgb(240, 240, 210)));
 		mListView.setDividerHeight(2);
 		mListView.setAdapter(mAdapter);
@@ -177,10 +177,9 @@ public class BookmarkActivity extends Activity {
 		modifyDialog.setTitle("즐겨찾기 추가");
 		
 		Bookmark item = (Bookmark)mAdapter.getItem(position);
-		modifyDialog.setHintText(item.name);
+		modifyDialog.setText(item.name);
 		
-		Button modify = (Button) findViewById(R.id.buttonA_addbookmark);
-		modify.setText("수정");
+		modifyDialog.changeOKBtnText("수정");
 		
 		modifyDialog.setOKClickListener(new View.OnClickListener() {
 
@@ -191,7 +190,7 @@ public class BookmarkActivity extends Activity {
 
 					mAdapter.modify(position, modifyDialog.getText());
 
-					mDialog.dismiss();
+					modifyDialog.dismiss();
 					Toast.makeText(BookmarkActivity.this, "수정되었습니다.", Toast.LENGTH_SHORT).show();
 					
 				}

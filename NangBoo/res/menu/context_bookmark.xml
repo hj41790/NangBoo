@@ -6,15 +6,17 @@
         <item android:id="@+id/context_menu_link_bookmark"
             android:orderInCategory="1"
             android:title="열기"
-            android:checked="true"/>
+            android:checkable="false"/>
         
         <item android:id="@+id/context_menu_modify_name_bookmark"
             android:orderInCategory="1"
-            android:title="제목 수정" />
+            android:title="제목 수정"
+            android:checkable="false" />
         
         <item android:id="@+id/context_menu_delete_bookmark"
             android:orderInCategory="1"
-            android:title="삭제"/>
+            android:title="삭제"
+            android:checkable="false" />
         
     </group>"
 

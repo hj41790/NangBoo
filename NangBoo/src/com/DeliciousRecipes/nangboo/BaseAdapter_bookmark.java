@@ -18,6 +18,7 @@ public class BaseAdapter_bookmark extends BaseAdapter {
 	BookmarkDBManager mDBmanager = null;
 
 	public BaseAdapter_bookmark(Context context) {
+		
 		mContext = context;
 		mLayoutInflater = LayoutInflater.from(mContext);
 		mDBmanager = BookmarkDBManager.getInstance(mContext);
@@ -103,8 +104,7 @@ public class BaseAdapter_bookmark extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mDBmanager.getCount();
 	}
 
 	@Override
@@ -136,20 +136,10 @@ public class BaseAdapter_bookmark extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View itemLayout = convertView;
-		ViewHolder viewHolder = null;
-		
-		if (itemLayout == null) {
-			itemLayout = mLayoutInflater.inflate(R.layout.ingredient_main, null);
 
-			viewHolder = new ViewHolder();
-			viewHolder.name = (TextView) itemLayout.findViewById(R.id.name_ingredient);
+		View itemLayout = mLayoutInflater.inflate(R.layout.listview_bookmark, null);
 
-			itemLayout.setTag(viewHolder);
-		} 
-		else {
-			viewHolder = (ViewHolder) itemLayout.getTag();
-		}
+		TextView name = (TextView) itemLayout.findViewById(R.id.name_bookmark_listview);
 		
 		if(mDBmanager.getIsChoosed(position))
 			itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
@@ -160,11 +150,10 @@ public class BaseAdapter_bookmark extends BaseAdapter {
 		Cursor mCursor = mDBmanager.getAll();
 		mCursor.moveToPosition(position);
 		
-		viewHolder.name.setText(mCursor.getString(1));
+		name.setText(mCursor.getString(1));
 		System.out.println(mCursor.getString(1));
 		
 		mCursor.close();
-
 		return itemLayout;
 	}
 

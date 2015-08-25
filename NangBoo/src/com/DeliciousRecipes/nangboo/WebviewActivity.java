@@ -30,7 +30,7 @@ public class WebviewActivity extends Activity{
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.searching_webview);
 
-		mDBmanager = BookmarkDBManager.getInstance(this);
+		//mDBmanager = BookmarkDBManager.getInstance(this);
 	    
 	    Intent intent = getIntent();
 		Bundle inputData = intent.getBundleExtra("SEARCHING_URL");
@@ -133,7 +133,7 @@ public class WebviewActivity extends Activity{
 					addRowValues.put("name", mDialog.getText());
 					addRowValues.put("URL", webview.getUrl());
 					
-					mDBmanager.insert(addRowValues);
+					//mDBmanager.insert(addRowValues);
 
 					mDialog.dismiss();
 					Toast.makeText(WebviewActivity.this, "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show();
