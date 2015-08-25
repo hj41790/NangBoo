@@ -1,9 +1,7 @@
 package com.DeliciousRecipes.nangboo;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -18,15 +16,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.GridView;
 import android.widget.Toast;
 
 public class BookmarkActivity extends Activity {
 	
 	BookmarkDBManager mDBmanager = null;
 	
-	ListView				mListView = null;
+	GridView				mListView = null;
 	BaseAdapter_bookmark 	mAdapter = null;
 	
 	Button back, modify;
@@ -47,9 +44,7 @@ public class BookmarkActivity extends Activity {
 		// 리스트뷰 생성 및 아이템 선택 리스너 설정
 		mAdapter = new BaseAdapter_bookmark(this);
 
-		mListView = (ListView) findViewById(R.id.listview_bookmark_activity);
-		mListView.setDivider(new ColorDrawable(Color.rgb(240, 240, 210)));
-		mListView.setDividerHeight(2);
+		mListView = (GridView) findViewById(R.id.listview_bookmark_activity);
 		mListView.setAdapter(mAdapter);
 		
 		registerForContextMenu(mListView);

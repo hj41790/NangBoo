@@ -153,12 +153,13 @@ public class MainActivity extends Activity {
 	         
 	         @Override
 	         public void onClick(View v) {
-				isClicked_chooseButton = false;
-				chooseIngredient.setBackgroundResource(R.drawable.btn_default_normal_holo_light);
-				mAdapter.clear();
 
 				Bundle bundleData = new Bundle();
 				bundleData.putString("INGREDIENT", mAdapter.ingredientURL());
+				
+				isClicked_chooseButton = false;
+				chooseIngredient.setBackgroundResource(R.drawable.btn_default_normal_holo_light);
+				mAdapter.clear();
 
 				Intent intent = new Intent(MainActivity.this, SearchingActivity.class);
 				intent.putExtra("SEARCHING_INGREDIENT", bundleData);

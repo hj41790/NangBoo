@@ -37,15 +37,20 @@
 
     </LinearLayout>
     
-    <ListView android:id="@+id/listview_bookmark_activity"
+    
+    <GridView
+	    android:id="@+id/listview_bookmark_activity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"	
         android:layout_weight="1"
-        android:background="#FFFF96"/>
+	    android:columnWidth="100dp"
+	    android:numColumns="3"
+	    android:verticalSpacing="10dp"
+	    android:horizontalSpacing="10dp"
+	    android:stretchMode="columnWidth" />
     
-
 </LinearLayout>

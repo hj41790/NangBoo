@@ -22,17 +22,6 @@ public class BaseAdapter_bookmark extends BaseAdapter {
 		mContext = context;
 		mLayoutInflater = LayoutInflater.from(mContext);
 		mDBmanager = BookmarkDBManager.getInstance(mContext);
-		
-		Cursor a = mDBmanager.getAll();
-
-		while (a.moveToNext()) {
-			Bookmark tmp = new Bookmark();
-			System.out.println(a.getString(1));
-			System.out.println(a.getString(2));
-		}
-
-		a.close();
-		
 	}
 	
 	// 즐겨찾기 추가
@@ -137,23 +126,33 @@ public class BaseAdapter_bookmark extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		View itemLayout = mLayoutInflater.inflate(R.layout.listview_bookmark, null);
+		View itemLayout = convertView;
+		ViewHolder viewHolder = null;
+		
+		if (itemLayout == null) {
+			itemLayout = mLayoutInflater.inflate(R.layout.listview_bookmark, null);
 
-		TextView name = (TextView) itemLayout.findViewById(R.id.name_bookmark_listview);
+			viewHolder = new ViewHolder();
+			viewHolder.name = (TextView) itemLayout.findViewById(R.id.name_bookmark_listview);
+
+			itemLayout.setTag(viewHolder);
+		} 
+		else {
+			viewHolder = (ViewHolder) itemLayout.getTag();
+		}
 		
 		if(mDBmanager.getIsChoosed(position))
 			itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
 		else
 			itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
-		
 
 		Cursor mCursor = mDBmanager.getAll();
 		mCursor.moveToPosition(position);
 		
-		name.setText(mCursor.getString(1));
-		System.out.println(mCursor.getString(1));
+		viewHolder.name.setText(mCursor.getString(1));
 		
 		mCursor.close();
+
 		return itemLayout;
 	}
 
