@@ -45,6 +45,43 @@
         android:layout_weight="1"
         android:background="#FFFF96"/>
     
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button android:id="@+id/addIngredient_main"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/add_gray"
+            android:textSize="12dp" />
+
+        <Button android:id="@+id/searchingRecipe_main"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/search_gray"
+            android:textSize="12dp" />
+
+        <Button android:id="@+id/bookmark_main"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/bookmark_gray"
+            android:textSize="12dp" />
+
+        <Button android:id="@+id/setting_main"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/setting_gray"
+            android:textSize="12dp" />
+    </LinearLayout>
+    
     <!--
 
     <TextView
@@ -56,9 +93,7 @@
         android:text="내가 바꿈 훗"
         android:textColor="#000" />
         
-    -->
-
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
@@ -97,5 +132,9 @@
             android:text="@string/setting_main"
             android:textSize="12dp" />
     </LinearLayout>
+        
+    -->
+
+    
 
 </LinearLayout>
