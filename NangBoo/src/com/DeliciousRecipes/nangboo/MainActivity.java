@@ -101,14 +101,14 @@ public class MainActivity extends Activity {
 				isClicked_chooseButton = !isClicked_chooseButton;
 
 				if (isClicked_chooseButton) {
-					multiple.setText("삭제");
+					multiple.setBackgroundResource(R.drawable.remove_gray);
 					chooseIngredient
-							.setBackgroundResource(R.drawable.btn_default_focused_holo_light);
+							.setBackgroundResource(R.drawable.select_orange);
 				} else {
-					multiple.setText("정렬");
+					multiple.setBackgroundResource(R.drawable.sort_gray);
 					mAdapter.clear();
 					chooseIngredient
-							.setBackgroundResource(R.drawable.btn_default_normal_holo_light);
+							.setBackgroundResource(R.drawable.select_gray);
 				}
 			}
 		});
@@ -140,7 +140,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				
 				isClicked_chooseButton = false;
-				chooseIngredient.setBackgroundResource(R.drawable.btn_default_normal_holo_light);
+				chooseIngredient.setBackgroundResource(R.drawable.select_gray);
 				mAdapter.clear();
 				
 				Intent intent = new Intent(MainActivity.this, SettingActivity.class);
@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
 				bundleData.putString("INGREDIENT", mAdapter.ingredientURL());
 				
 				isClicked_chooseButton = false;
-				chooseIngredient.setBackgroundResource(R.drawable.btn_default_normal_holo_light);
+				chooseIngredient.setBackgroundResource(R.drawable.select_gray);
 				mAdapter.clear();
 
 				Intent intent = new Intent(MainActivity.this, SearchingActivity.class);
@@ -173,7 +173,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 
 				isClicked_chooseButton = false;
-				chooseIngredient.setBackgroundResource(R.drawable.btn_default_normal_holo_light);
+				chooseIngredient.setBackgroundResource(R.drawable.select_gray);
 				mAdapter.clear();
 				
 				Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
@@ -241,7 +241,7 @@ public class MainActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 
 						isClicked_chooseButton = false;
-						chooseIngredient.setBackgroundResource(R.drawable.btn_default_normal_holo_light);					
+						chooseIngredient.setBackgroundResource(R.drawable.select_gray);					
 						mAdapter.clear();	// 선택한 재료들 선택취소
 						
 						// 확인 버튼 터치

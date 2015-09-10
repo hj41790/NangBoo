@@ -36,13 +36,14 @@ public final class R {
         public static final int add_gray=0x7f020000;
         public static final int app_icon=0x7f020001;
         public static final int bookmark_gray=0x7f020002;
-        public static final int btn_default_focused_holo_light=0x7f020003;
-        public static final int btn_default_normal_holo_light=0x7f020004;
-        public static final int btn_dialog_normal=0x7f020005;
-        public static final int button_selector_main=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int search_gray=0x7f020008;
-        public static final int setting_gray=0x7f020009;
+        public static final int ic_launcher=0x7f020003;
+        public static final int remove_gray=0x7f020004;
+        public static final int search_gray=0x7f020005;
+        public static final int select_gray=0x7f020006;
+        public static final int select_orange=0x7f020007;
+        public static final int setting_gray=0x7f020008;
+        public static final int sort_gray=0x7f020009;
+        public static final int title=0x7f02000a;
     }
     public static final class id {
         public static final int action_bar=0x7f0b0000;
