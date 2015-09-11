@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 public class SearchingActivity extends Activity{
 	
@@ -22,6 +23,13 @@ public class SearchingActivity extends Activity{
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_searching);
 	    
+	    //테마적용
+		LinearLayout layout = (LinearLayout)findViewById(R.id.action_bar_searching);
+		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+		EditText editText = (EditText) findViewById(R.id.searching_bar);
+		editText.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+		
+		
 	    Intent intent = getIntent();
 		Bundle inputData = intent.getBundleExtra("SEARCHING_INGREDIENT");
 		

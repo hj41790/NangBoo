@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -34,6 +35,8 @@ public class NotiActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_noti);
 		
+		LinearLayout layout = (LinearLayout)findViewById(R.id.action_bar_noti);
+		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));		
 		/* 액션바 BACK버튼 리스너 */
 		Button back = (Button)findViewById(R.id.back_button_noti);
 		back.setOnClickListener(new OnClickListener(){
