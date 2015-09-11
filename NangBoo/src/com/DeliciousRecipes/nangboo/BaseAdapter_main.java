@@ -153,7 +153,7 @@ public class BaseAdapter_main extends BaseAdapter {
 			viewHolder = (ViewHolder) itemLayout.getTag();
 		}
 		
-		//왜 선택이 안풀리고 난리 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
+
 		if(mDBmanager.getIsChoosed(position, sort_type))
 		{
 			switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))

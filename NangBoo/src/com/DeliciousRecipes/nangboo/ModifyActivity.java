@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class ModifyActivity extends Activity{
@@ -38,6 +39,17 @@ public class ModifyActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_modify);
 		
+		//테마적용
+		LinearLayout layout = (LinearLayout)findViewById(R.id.action_bar_modify);
+		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));		
+		EditText editText = (EditText) findViewById(R.id.product_name_edittext_modify);
+	    editText.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+	    Button button = (Button)findViewById(R.id.expiration_date_button_modify);
+	    button.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+	    editText = (EditText) findViewById(R.id.memo_modify);
+	    editText.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+	    
+	    
 		Intent intent = getIntent();
 		Bundle inputData = intent.getBundleExtra("INGREDIENT");
 		

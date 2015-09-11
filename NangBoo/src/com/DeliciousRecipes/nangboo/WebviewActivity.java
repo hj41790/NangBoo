@@ -12,6 +12,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -29,7 +30,11 @@ public class WebviewActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.searching_webview);
-
+	    
+	    //테마적용
+		LinearLayout layout = (LinearLayout)findViewById(R.id.action_bar_webview);
+		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+		
 		mDBmanager = BookmarkDBManager.getInstance(this);
 	    
 	    Intent intent = getIntent();
