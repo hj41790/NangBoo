@@ -128,13 +128,20 @@ public class MainActivity extends Activity {
 
 				if (isClicked_chooseButton) {
 					multiple.setBackgroundResource(R.drawable.remove_gray);
-					chooseIngredient
-							.setBackgroundResource(R.drawable.select_orange);
+					
+					switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
+					{
+						case R.color.green :
+							chooseIngredient.setBackgroundResource(R.drawable.select_green);
+							break;
+						default :
+							chooseIngredient.setBackgroundResource(R.drawable.select_orange);
+					}
+					
 				} else {
 					multiple.setBackgroundResource(R.drawable.sort_gray);
 					mAdapter.clear();
-					chooseIngredient
-							.setBackgroundResource(R.drawable.select_gray);
+					chooseIngredient.setBackgroundResource(R.drawable.select_gray);
 				}
 			}
 		});

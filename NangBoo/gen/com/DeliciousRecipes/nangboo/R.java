@@ -42,10 +42,11 @@ public final class R {
         public static final int remove_gray=0x7f020004;
         public static final int search_gray=0x7f020005;
         public static final int select_gray=0x7f020006;
-        public static final int select_orange=0x7f020007;
-        public static final int setting_gray=0x7f020008;
-        public static final int sort_gray=0x7f020009;
-        public static final int title=0x7f02000a;
+        public static final int select_green=0x7f020007;
+        public static final int select_orange=0x7f020008;
+        public static final int setting_gray=0x7f020009;
+        public static final int sort_gray=0x7f02000a;
+        public static final int title=0x7f02000b;
     }
     public static final class id {
         public static final int action_bar_add=0x7f0b0000;

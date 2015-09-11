@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -95,11 +96,11 @@ public class SettingActivity extends Activity {
 		int checked;
 		switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
 		{
-		case R.color.green :
-			checked = 1;
-			break;
-		default :
-			checked = 0;
+			case R.color.green :
+				checked = 1;
+				break;
+			default :
+				checked = 0;
 		}
 		
 		System.out.println("checked : "+checked);
@@ -125,7 +126,7 @@ public class SettingActivity extends Activity {
 							MainActivity.editor.commit();
 						}
 
-//						applyTheme();
+						applyTheme();
 
 						
 						
@@ -146,20 +147,30 @@ public class SettingActivity extends Activity {
 	//테마 적용 메서드
 	void applyTheme()
 	{
-		LinearLayout layout = (LinearLayout) findViewById(R.id.action_bar_add);
-		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
-		layout = (LinearLayout) findViewById(R.id.action_bar_bookmark);
-		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
-		layout = (LinearLayout) findViewById(R.id.action_bar_modify);
-		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
-		layout = (LinearLayout) findViewById(R.id.action_bar_noti);
-		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
-		layout = (LinearLayout) findViewById(R.id.action_bar_searching);
-		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
-		layout = (LinearLayout) findViewById(R.id.action_bar_setting);
-		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
-		layout = (LinearLayout) findViewById(R.id.action_bar_webview);
-		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+		LinearLayout layout;
+		switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
+		{
+			case R.color.green :
+				layout = (LinearLayout) findViewById(R.id.action_bar_setting);
+				layout.setBackgroundColor(Color.rgb(214, 251, 156));
+				break;
+			default :
+				layout = (LinearLayout) findViewById(R.id.action_bar_setting);
+				layout.setBackgroundColor(Color.rgb(255,255,0));
+		}
+		
+//		layout = (LinearLayout) findViewById(R.id.action_bar_bookmark);
+//		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+//		layout = (LinearLayout) findViewById(R.id.action_bar_modify);
+//		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+//		layout = (LinearLayout) findViewById(R.id.action_bar_noti);
+//		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+//		layout = (LinearLayout) findViewById(R.id.action_bar_searching);
+//		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+//		layout = (LinearLayout) findViewById(R.id.action_bar_setting);
+//		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+//		layout = (LinearLayout) findViewById(R.id.action_bar_webview);
+//		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
 	}
 
 	
