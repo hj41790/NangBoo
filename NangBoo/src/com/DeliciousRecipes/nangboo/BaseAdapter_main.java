@@ -153,10 +153,29 @@ public class BaseAdapter_main extends BaseAdapter {
 			viewHolder = (ViewHolder) itemLayout.getTag();
 		}
 		
+		//왜 선택이 안풀리고 난리 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
 		if(mDBmanager.getIsChoosed(position, sort_type))
-			itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
+		{
+			switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
+			{
+				case R.color.green :
+					itemLayout.setBackgroundColor(Color.rgb(166, 196, 109));
+					break;
+				default :
+					itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
+			}
+		}
 		else
-			itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
+		{
+			switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
+			{
+				case R.color.green :
+					itemLayout.setBackgroundColor(Color.rgb(205, 240, 150));
+					break;
+				default :
+					itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
+			}
+		}
 		
 
 		Cursor mCursor = mDBmanager.getAll(ORDER_BY[sort_type]);

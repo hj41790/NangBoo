@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,10 +21,14 @@ public class MainActivity extends Activity {
 	
 	final static int MODIFY_ACTIVITY = 0;
 	final static int ADD_ACTIVITY = 1;
+	final static int SETTING_ACTIVITY = 2;
 	
 	public static final int SORT_NAME = 0;
 	public static final int SORT_DATE = 1;
 	public static final int SORT_REGISTER = 2;
+	
+	final static int RESULT_THEME = 0;
+	final static int RESULT_FONTSIZE = 1;
 
 	
 	/* 单捞磐海捞胶 备绵 */
@@ -40,12 +47,31 @@ public class MainActivity extends Activity {
 	CustomDialog mDialog = null;
 	AlertDialog.Builder builder = null;
 	
-
+	
+	/* SharedPreference */
+	static SharedPreferences settingPref;
+	static Editor editor;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		
+		/* SharedPreference 汲沥 */
+		 settingPref = getSharedPreferences("settingPref", 0);
+		 editor = settingPref.edit();
+		 //noti
+		 if(settingPref.contains("notiIsOn"));
+		 else editor.putBoolean("notiIsOn", true);
+		 //THEME
+		 if(settingPref.contains("THEME"));
+		 else editor.putInt("THEME", R.color.yellow);
+		 editor.commit();
+		 
+		 
 
 		mDBmanager = IngredientDBManager.getInstance(this);
 
@@ -144,7 +170,7 @@ public class MainActivity extends Activity {
 				mAdapter.clear();
 				
 				Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, SETTING_ACTIVITY);
 			}
 		});//可记 场
 		
@@ -181,7 +207,7 @@ public class MainActivity extends Activity {
 			}
 		});// 可记 场
 		
-	}
+	}//onCreate() 场
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -214,6 +240,13 @@ public class MainActivity extends Activity {
 					mAdapter.add(modifyValue);
 					
 					break;
+				}
+			case SETTING_ACTIVITY :
+				if(resultCode == RESULT_THEME){
+					mAdapter.notifyDataSetChanged();
+				}
+				else if(resultCode == RESULT_FONTSIZE){
+					
 				}
 		
 		}		
@@ -347,4 +380,9 @@ public class MainActivity extends Activity {
 		mDialog.show();
 
 	}
+
+	
+
+
+
 }

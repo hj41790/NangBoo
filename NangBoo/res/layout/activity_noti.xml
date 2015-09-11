@@ -8,11 +8,10 @@
         <!--  액션바 대신에 LinearLayout! height는 40dp로 통일해주세용 -->
     
     <LinearLayout
-        android:id="@+id/action_bar"
+        android:id="@+id/action_bar_noti"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="end"
-        android:background="@color/yellow"
         android:orientation="horizontal" >
         <Button
             android:id="@+id/back_button_noti"
@@ -20,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:text="@string/back"
-            android:background="@color/yellow"
+            android:background="@color/clarity"
             />
         <Space
             android:layout_width="wrap_content"
@@ -33,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
-            android:background="@color/yellow"
+            android:background="@color/clarity"
             android:text="" />
 	</LinearLayout>
 	
@@ -64,6 +63,17 @@
     	    android:layout_marginRight="40dp"
     	    android:checked="true"
     	/>
+    	
+    	
+    	<!-- 테스팅 버튼 -->
+    	<Button
+    	    android:id="@+id/testing"
+    	    android:text="TESTING"
+    	    android:layout_width="wrap_content"
+       	    android:layout_height="wrap_content"
+       	    android:layout_below="@id/onoff_textview_noti"
+       	    />
+    	
     	
     </RelativeLayout>
     

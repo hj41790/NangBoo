@@ -5,11 +5,10 @@
     android:orientation="vertical" >
     
     <LinearLayout
-        android:id="@+id/action_bar"
+        android:id="@+id/action_bar_webview"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="end"
-        android:background="@color/yellow"
         android:orientation="horizontal" >
         <Button
             android:id="@+id/back_button_webview"
@@ -17,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:text="@string/back"
-            android:background="@color/yellow"
+            android:background="@color/clarity"
             />
         <Space
             android:layout_width="wrap_content"
@@ -30,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
-            android:background="@color/yellow"
+            android:background="@color/clarity"
             android:text="즐겨찾기 추가" />
 	</LinearLayout>
 	

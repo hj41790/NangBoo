@@ -1,39 +1,112 @@
 package com.DeliciousRecipes.nangboo;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
+import android.widget.Toast;
 
 public class NotiActivity extends Activity {
 
+	
+	
+	NotificationManager nm;
+	Notification n;
+	NotificationCompat.Builder builder;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_noti);
 		
-		Switch onoff = (Switch)findViewById(R.id.onoff_switch_noti);
-		onoff.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-
+		/* 액션바 BACK버튼 리스너 */
+		Button back = (Button)findViewById(R.id.back_button_noti);
+		back.setOnClickListener(new OnClickListener(){
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
+			public void onClick(View v) {
+				finish();
+			}
+			
+		});
+		
+		/* onoff 스위치 */
+		Switch onoff = (Switch)findViewById(R.id.onoff_switch_noti);
+		onoff.setChecked(MainActivity.settingPref.getBoolean("notiIsOn", true)); //스위치 값을 저장된 값으로 설정
+		onoff.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if(isChecked)
 				{
+					MainActivity.editor.putBoolean("notiIsOn", true);
+					MainActivity.editor.commit();
 					Toast.makeText(getApplicationContext(), "On", Toast.LENGTH_SHORT).show();
 				}
 				else
 				{
+					MainActivity.editor.putBoolean("notiIsOn", false);
+					MainActivity.editor.commit();
 					Toast.makeText(getApplicationContext(), "Off", Toast.LENGTH_SHORT).show();					
 				}
 			}
 			
 		});
-	}
+		
+		
+		
+		//노티띄우기
+		nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);  
+		Resources res = getResources();  
+	    ///////////////////////////////////getApplicationContext()
+	    Intent notificationIntent = new Intent(getApplicationContext(), MainActivity.class);  
+//	    notificationIntent.putExtra("notificationId", 9999); //전달할 값
+
+	    PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);  
+
+	    builder = new NotificationCompat.Builder(getApplicationContext())  
+	            .setContentTitle("상태바 드래그시 보이는 타이틀")  
+	            .setContentText("상태바 드래그시 보이는 서브타이틀")  
+	            .setTicker("상태바 한줄 메시지")  
+	            .setSmallIcon(R.drawable.ic_launcher)  
+	            .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher))  
+	            .setContentIntent(contentIntent)  
+	            .setAutoCancel(true)
+	            .setWhen(System.currentTimeMillis())  
+	            .setDefaults( Notification.DEFAULT_SOUND|Notification.DEFAULT_VIBRATE|Notification.DEFAULT_LIGHTS)  
+	            .setNumber(13);  
+
+    
+        /* testing 버튼 */
+		Button testing = (Button)findViewById(R.id.testing);
+		testing.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				if(MainActivity.settingPref.getBoolean("notiIsOn", true))
+				{
+
+				    n = builder.build();
+					nm.notify(1234, n); 
+				}
+			}
+		});
+		
+		
+	}//onCreate끝
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
