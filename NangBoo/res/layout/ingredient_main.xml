@@ -9,13 +9,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_margin="13dp"
-        android:textColor="#000"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="13dp"
+        android:layout_marginRight="13dp"
+        android:textColor="#7D7D7D"/>
     
     <TextView android:id="@+id/expiration_ingredient"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_margin="13dp"
+		android:gravity="center"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="13dp"
+        android:layout_marginRight="20dp"
         android:textColor="#7D7D7D"/>
         
 

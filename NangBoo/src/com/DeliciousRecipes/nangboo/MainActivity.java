@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
 	/* 데이터베이스 구축 */
 	public IngredientDBManager mDBmanager = null;
 
+
 	ListView 				mListView = null;
 	BaseAdapter_main 		mAdapter = null;
 
@@ -171,8 +172,8 @@ public class MainActivity extends Activity {
 		setting.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
 				isClicked_chooseButton = false;
+				multiple.setBackgroundResource(R.drawable.sort_gray);
 				chooseIngredient.setBackgroundResource(R.drawable.select_gray);
 				mAdapter.clear();
 				
@@ -185,14 +186,15 @@ public class MainActivity extends Activity {
 	      searchingRecipe.setOnClickListener(new View.OnClickListener() {
 	         
 	         @Override
-	         public void onClick(View v) {
+			public void onClick(View v) {
+	        	 
+				isClicked_chooseButton = false;
+	     		multiple.setBackgroundResource(R.drawable.sort_gray);
+	     		chooseIngredient.setBackgroundResource(R.drawable.select_gray);
+	     		mAdapter.clear();
 
 				Bundle bundleData = new Bundle();
 				bundleData.putString("INGREDIENT", mAdapter.ingredientURL());
-				
-				isClicked_chooseButton = false;
-				chooseIngredient.setBackgroundResource(R.drawable.select_gray);
-				mAdapter.clear();
 
 				Intent intent = new Intent(MainActivity.this, SearchingActivity.class);
 				intent.putExtra("SEARCHING_INGREDIENT", bundleData);
@@ -204,8 +206,8 @@ public class MainActivity extends Activity {
 		bookmark.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
 				isClicked_chooseButton = false;
+				multiple.setBackgroundResource(R.drawable.sort_gray);
 				chooseIngredient.setBackgroundResource(R.drawable.select_gray);
 				mAdapter.clear();
 				
@@ -261,6 +263,26 @@ public class MainActivity extends Activity {
 		
 	}
 	
+	
+
+	@Override
+	protected void onStop() {
+		
+		
+		
+		super.onStop();
+	}
+
+	@Override
+	protected void onDestroy() {
+		
+		isClicked_chooseButton = false;
+		chooseIngredient.setBackgroundResource(R.drawable.select_gray);
+		mAdapter.clear();
+		
+		super.onDestroy();
+	}
+	
 	private void createAddDialog(){
 		
 		//재료 선택 방식 선택하는 팝업창
@@ -279,10 +301,11 @@ public class MainActivity extends Activity {
 				.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-
+						
 						isClicked_chooseButton = false;
-						chooseIngredient.setBackgroundResource(R.drawable.select_gray);					
-						mAdapter.clear();	// 선택한 재료들 선택취소
+						multiple.setBackgroundResource(R.drawable.sort_gray);
+						chooseIngredient.setBackgroundResource(R.drawable.select_gray);
+						mAdapter.clear();
 						
 						// 확인 버튼 터치
 						// 여기서 선택한 값을 넘기면됨

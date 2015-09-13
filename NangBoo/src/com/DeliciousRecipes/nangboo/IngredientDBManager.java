@@ -1,5 +1,8 @@
 package com.DeliciousRecipes.nangboo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,9 +19,10 @@ public class IngredientDBManager extends SQLiteOpenHelper{
 	static final String TABLE_INGREDIENT 	= "ingredient";
 	static final int 	DB_VERSION 			= 1;
 	
-	Context mContext = null;
-	
 	private static	IngredientDBManager mDBmanager 	= null;
+	
+	Context mContext = null;
+	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
 	
 	/* 싱글톤 패턴을 이용하여 하나의 객체만을 생성 */
 	public static IngredientDBManager getInstance(Context context){
@@ -124,6 +128,18 @@ public class IngredientDBManager extends SQLiteOpenHelper{
 		if(a.getInt(0)==1) return true;
 		else return false;
 	}
+	
+	public boolean compareExpirationDate(int position, int type){
+		
+		Cursor a = getReadableDatabase().query( TABLE_INGREDIENT, new String[]{"expirationDate"}, 
+									null, null, null, null, ORDER_BY[type]);
+		
+		a.moveToPosition(position);
+		
+		if(a.getString(0).compareTo(format.format(new Date()))<0) return true;
+		else return false;
+	}
+	
 	
 	/* 특정레코드 수정 */
 	public int update(ContentValues updateRowValue, String whereClause, String[] whereArgs){

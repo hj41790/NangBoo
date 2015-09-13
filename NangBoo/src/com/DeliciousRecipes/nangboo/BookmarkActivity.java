@@ -109,8 +109,17 @@ public class BookmarkActivity extends Activity {
 		
 		
 	}
-	
-	
+
+
+	@Override
+	protected void onDestroy() {
+		mAdapter.clear();
+		
+		super.onDestroy();
+	}
+
+
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 									ContextMenuInfo menuInfo) {

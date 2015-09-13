@@ -25,7 +25,7 @@
     <string name="title_activity_searching">SearchingActivity</string>
     <string name="title_activity_webview">WebviewActivity</string>
     <string name="title_activity_bookmark">BookmarkActivity</string>
-    <string name="searching_text">검색하고 싶은 재료를 띄어쓰기로 구분하여 입력해주세요.\n\n예시) 계란 당근 오이</string>
+    <string name="searching_text">검색하고 싶은 재료를\n띄어쓰기로 구분하여 입력해주세요.\n\n예시) 계란 당근 오이</string>
     <string name="title_activity_info">InfoActivity</string>
 
 </resources>

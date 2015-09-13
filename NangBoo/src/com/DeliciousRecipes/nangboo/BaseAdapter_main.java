@@ -140,8 +140,7 @@ public class BaseAdapter_main extends BaseAdapter {
 		ViewHolder viewHolder = null;
 		
 		if (itemLayout == null) {
-			itemLayout = mLayoutInflater
-					.inflate(R.layout.ingredient_main, null);
+			itemLayout = mLayoutInflater.inflate(R.layout.ingredient_main, null);
 
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) itemLayout.findViewById(R.id.name_ingredient);
@@ -154,26 +153,48 @@ public class BaseAdapter_main extends BaseAdapter {
 		}
 		
 
-		if(mDBmanager.getIsChoosed(position, sort_type))
+		if(mDBmanager.getIsChoosed(position, sort_type))	//선택받음
 		{
-			switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
-			{
-				case R.color.green :
-					itemLayout.setBackgroundColor(Color.rgb(166, 196, 109));
-					break;
-				default :
-					itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
+			
+			if(mDBmanager.compareExpirationDate(position, sort_type)){
+				itemLayout.setBackgroundColor(Color.rgb(65, 65, 50));
+				viewHolder.name.setTextColor(Color.WHITE);
+				viewHolder.expiration.setTextColor(Color.WHITE);
+			}
+			else{
+				viewHolder.name.setTextColor(Color.rgb(70, 70, 70));
+				viewHolder.expiration.setTextColor(Color.rgb(70, 70, 70));
+				
+				switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
+				{
+					case R.color.green :
+						itemLayout.setBackgroundColor(Color.rgb(166, 196, 109));
+						break;
+					default :
+						itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
+				}
 			}
 		}
-		else
+		else	// 안받음
 		{
-			switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
-			{
-				case R.color.green :
-					itemLayout.setBackgroundColor(Color.rgb(210, 250, 150));
-					break;
-				default :
-					itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
+			if(mDBmanager.compareExpirationDate(position, sort_type)){
+				itemLayout.setBackgroundColor(Color.rgb(115, 115, 80));
+				viewHolder.name.setTextColor(Color.WHITE);
+				viewHolder.expiration.setTextColor(Color.WHITE);
+			}
+			else{
+				
+				viewHolder.name.setTextColor(Color.rgb(70, 70, 70));
+				viewHolder.expiration.setTextColor(Color.rgb(70, 70, 70));
+				
+				switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
+				{
+					case R.color.green :
+						itemLayout.setBackgroundColor(Color.rgb(210, 250, 150));
+						break;
+					default :
+						itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
+				}
 			}
 		}
 		

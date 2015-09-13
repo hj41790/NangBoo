@@ -83,7 +83,7 @@ public class NotiActivity extends Activity {
 	    builder = new NotificationCompat.Builder(getApplicationContext())  
 	            .setContentTitle("유통기한이 코앞이에요!")  
 	            .setContentText("재료이름 재료이름 재료이름 주르륵")  
-	            .setTicker("상태바 한줄 메시지")  
+	            .setTicker("유통기한이 코앞이에요!")  
 	            .setSmallIcon(R.drawable.app_icon)  
 	            .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.app_icon))  
 	            .setContentIntent(contentIntent)  
