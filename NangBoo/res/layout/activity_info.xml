@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@color/white">
+    tools:context="com.DeliciousRecipes.nangboo.InfoActivity"
+    android:background="@color/white" 
+    android:orientation="vertical">
+    
+    <!--  액션바 대신에 LinearLayout! height는 40dp로 통일해주세용 -->
     
     <LinearLayout
-        android:id="@+id/action_bar_searching"
+        android:id="@+id/action_bar_info"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="end"
         android:orientation="horizontal" >
-
         <Button
-            android:id="@+id/back_button_searching"
+            android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
@@ -26,30 +28,22 @@
             android:layout_gravity="fill_horizontal"
             android:layout_weight="1"
             />
-
-    </LinearLayout>
+        <Button
+            android:id="@+id/ok_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:background="@color/clarity"
+            android:text="" />
+	</LinearLayout>
     
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/searching_text"
-        android:textSize="17dp"/>
-    
-    <EditText android:id="@+id/searching_bar"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="40dp"
-        android:paddingLeft="8dp"
+        android:text="냉장고를 부탁해!\n\n모든 레시피 검색은 AllRecipes에서 이루어집니다.\nallrecipes.kr\n\nDelicious Recipes"
         android:textSize="20dp"
-		/>
-    
-    <Button android:id="@+id/searching_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="검색"/>
+        android:paddingTop="40dp"
+        android:paddingLeft="40dp"
+         />
 
 </LinearLayout>

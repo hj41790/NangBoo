@@ -17,6 +17,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class BookmarkActivity extends Activity {
@@ -39,6 +40,11 @@ public class BookmarkActivity extends Activity {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_bookmark);
 	    
+	    //테마적용
+		LinearLayout layout = (LinearLayout)findViewById(R.id.action_bar_bookmark);
+		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+		
+		
 	    mDBmanager = BookmarkDBManager.getInstance(this);
 	    
 		// 리스트뷰 생성 및 아이템 선택 리스너 설정
@@ -96,6 +102,7 @@ public class BookmarkActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				mAdapter.clear();
 				finish();
 			}
 		});
@@ -169,7 +176,7 @@ public class BookmarkActivity extends Activity {
 	
 	private void createModifyBookmarkDialog(final int position){
 		modifyDialog = new AddBookmark_Dialog(this);
-		modifyDialog.setTitle("즐겨찾기 추가");
+		modifyDialog.setTitle("수정");
 		
 		Bookmark item = (Bookmark)mAdapter.getItem(position);
 		modifyDialog.setText(item.name);

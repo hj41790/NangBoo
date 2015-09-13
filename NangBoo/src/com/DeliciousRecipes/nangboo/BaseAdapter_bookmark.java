@@ -142,9 +142,28 @@ public class BaseAdapter_bookmark extends BaseAdapter {
 		}
 		
 		if(mDBmanager.getIsChoosed(position))
-			itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
+		{
+			switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
+			{
+			case R.color.green :
+				itemLayout.setBackgroundColor(Color.rgb(166, 196, 109));
+				break;
+			default :
+				itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
+			}
+		}
 		else
-			itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
+		{
+			switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
+			{
+			case R.color.green :
+				itemLayout.setBackgroundColor(Color.rgb(205, 240, 150));
+				break;
+			default :
+				itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
+			}
+		}
+
 
 		Cursor mCursor = mDBmanager.getAll();
 		mCursor.moveToPosition(position);

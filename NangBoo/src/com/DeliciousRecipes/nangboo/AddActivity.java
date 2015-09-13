@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+
 //import java.sql.Date;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class AddActivity extends Activity {
@@ -44,6 +46,16 @@ public class AddActivity extends Activity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_add);
 
+      //테마적용
+      LinearLayout layout = (LinearLayout)findViewById(R.id.action_bar_add);
+      layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+      EditText editText = (EditText) findViewById(R.id.product_name_edittext);
+      editText.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+      Button button = (Button)findViewById(R.id.expiration_date_button);
+      button.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+      editText = (EditText) findViewById(R.id.memo_add);
+      editText.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));
+		
       // QRCode 인식
       Intent intent = getIntent();
       Boolean qr = intent.getExtras().getBoolean("qrcode");

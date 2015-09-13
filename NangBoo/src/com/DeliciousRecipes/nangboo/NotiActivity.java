@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -34,6 +35,8 @@ public class NotiActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_noti);
 		
+		LinearLayout layout = (LinearLayout)findViewById(R.id.action_bar_noti);
+		layout.setBackgroundResource(MainActivity.settingPref.getInt("THEME", R.color.yellow));		
 		/* 액션바 BACK버튼 리스너 */
 		Button back = (Button)findViewById(R.id.back_button_noti);
 		back.setOnClickListener(new OnClickListener(){
@@ -78,11 +81,11 @@ public class NotiActivity extends Activity {
 	    PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);  
 
 	    builder = new NotificationCompat.Builder(getApplicationContext())  
-	            .setContentTitle("상태바 드래그시 보이는 타이틀")  
-	            .setContentText("상태바 드래그시 보이는 서브타이틀")  
+	            .setContentTitle("유통기한이 코앞이에요!")  
+	            .setContentText("재료이름 재료이름 재료이름 주르륵")  
 	            .setTicker("상태바 한줄 메시지")  
-	            .setSmallIcon(R.drawable.ic_launcher)  
-	            .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher))  
+	            .setSmallIcon(R.drawable.app_icon)  
+	            .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.app_icon))  
 	            .setContentIntent(contentIntent)  
 	            .setAutoCancel(true)
 	            .setWhen(System.currentTimeMillis())  

@@ -24,16 +24,16 @@
             android:scaleType="fitCenter"/>        
 
         <Button android:id="@+id/chooseIngredient_main"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="30dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/select_gray"
             android:textSize="12dp" />
 
         <Button android:id="@+id/multiple_main"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="30dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/sort_gray"
             android:textSize="12dp" />
     </LinearLayout>
@@ -48,34 +48,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:paddingBottom="15dp"
         android:gravity="center"
         android:orientation="horizontal" >
 
         <Button android:id="@+id/addIngredient_main"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_margin="30dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/add_gray"
             android:textSize="12dp" />
 
         <Button android:id="@+id/searchingRecipe_main"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_margin="30dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/search_gray"
             android:textSize="12dp" />
 
         <Button android:id="@+id/bookmark_main"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_margin="30dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/bookmark_gray"
             android:textSize="12dp" />
 
         <Button android:id="@+id/setting_main"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_margin="30dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/setting_gray"
             android:textSize="12dp" />
     </LinearLayout>
