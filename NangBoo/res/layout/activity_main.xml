@@ -66,12 +66,12 @@
                 android:textColor="#000" />
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:gravity="center"
                 android:layout_marginBottom="13dp"
                 android:layout_marginLeft="13dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="33dp"
                 android:layout_marginTop="13dp"
                 android:text=" 유통기한"
                 android:textColor="#000" />
@@ -100,38 +100,51 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:paddingBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:gravity="center"
         android:orientation="horizontal" >
 
         <Button android:id="@+id/addIngredient_main"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
             android:background="@drawable/add_gray"
             android:textSize="12dp" />
+        
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_horizontal"
+            android:layout_weight="1"/>
 
         <Button android:id="@+id/searchingRecipe_main"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
             android:background="@drawable/search_gray"
             android:textSize="12dp" />
+        
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_horizontal"
+            android:layout_weight="1"/>
+        
 
         <Button android:id="@+id/bookmark_main"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
             android:background="@drawable/bookmark_gray"
             android:textSize="12dp" />
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_horizontal"
+            android:layout_weight="1"/>
+        
         <Button android:id="@+id/setting_main"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
             android:background="@drawable/setting_gray"
             android:textSize="12dp" />
     </LinearLayout>

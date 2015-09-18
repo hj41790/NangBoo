@@ -16,13 +16,13 @@
         android:textColor="#7D7D7D"/>
     
     <TextView android:id="@+id/expiration_ingredient"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 		android:gravity="center"
         android:layout_marginLeft="13dp"
         android:layout_marginTop="13dp"
         android:layout_marginBottom="13dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="30dp"
         android:textColor="#7D7D7D"/>
         
 

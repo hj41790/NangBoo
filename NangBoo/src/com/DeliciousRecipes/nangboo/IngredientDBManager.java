@@ -1,6 +1,8 @@
 package com.DeliciousRecipes.nangboo;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import android.content.ContentValues;
@@ -155,4 +157,27 @@ public class IngredientDBManager extends SQLiteOpenHelper{
 		
 		return getReadableDatabase().query(TABLE_INGREDIENT, null, null, null, null, null, null).getCount();
 	}
+	
+	public ArrayList<String> getApproachingItemArray(){
+		ArrayList<String> arr = new ArrayList<String>();
+
+		Calendar cal = Calendar.getInstance();
+		String day1 = format.format(cal.getTime());
+		
+		cal.add(cal.DATE, 2);
+		String day2 = format.format(cal.getTime());
+		
+		Cursor mCursor = getAll(ORDER_BY[2]);
+		
+		while(mCursor.moveToNext()){
+			String tmp = mCursor.getString(2);
+			if(tmp.compareTo(day1)>=0 && tmp.compareTo(day2)<=0)
+				arr.add(mCursor.getString(1));
+		}
+		
+		mCursor.close();
+		
+		return arr;
+	}
+	
 }

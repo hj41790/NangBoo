@@ -157,7 +157,7 @@ public class BaseAdapter_main extends BaseAdapter {
 		{
 			
 			if(mDBmanager.compareExpirationDate(position, sort_type)){
-				itemLayout.setBackgroundColor(Color.rgb(65, 65, 50));
+				itemLayout.setBackgroundColor(Color.rgb(61, 58, 36));
 				viewHolder.name.setTextColor(Color.WHITE);
 				viewHolder.expiration.setTextColor(Color.WHITE);
 			}
@@ -171,14 +171,14 @@ public class BaseAdapter_main extends BaseAdapter {
 						itemLayout.setBackgroundColor(Color.rgb(166, 196, 109));
 						break;
 					default :
-						itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
+						itemLayout.setBackgroundColor(Color.rgb(255, 155, 84));
 				}
 			}
 		}
 		else	// ¾È¹ÞÀ½
 		{
 			if(mDBmanager.compareExpirationDate(position, sort_type)){
-				itemLayout.setBackgroundColor(Color.rgb(115, 115, 80));
+				itemLayout.setBackgroundColor(Color.rgb(107, 104, 81));
 				viewHolder.name.setTextColor(Color.WHITE);
 				viewHolder.expiration.setTextColor(Color.WHITE);
 			}
@@ -193,7 +193,7 @@ public class BaseAdapter_main extends BaseAdapter {
 						itemLayout.setBackgroundColor(Color.rgb(210, 250, 150));
 						break;
 					default :
-						itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
+						itemLayout.setBackgroundColor(Color.rgb(255, 255, 90));
 				}
 			}
 		}

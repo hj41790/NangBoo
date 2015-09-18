@@ -65,11 +65,6 @@ public class SearchingActivity extends Activity{
 	            }
 	            String recipeSearchingURL = "http://allrecipes.kr/m/recipes/search/list?text=" 
 	                                 + addURL;
-	            
-				// 레시피 검색 url로 이동
-//				Uri uri = Uri.parse(recipeSearchingURL);
-//				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//				startActivity(intent);
 				
 				Bundle bundleData = new Bundle();
 				bundleData.putString("URL", recipeSearchingURL);

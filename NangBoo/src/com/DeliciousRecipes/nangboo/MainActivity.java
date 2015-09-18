@@ -60,19 +60,19 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		
 		/* SharedPreference ¼³Á¤ */
-		 settingPref = getSharedPreferences("settingPref", 0);
-		 editor = settingPref.edit();
-		 //noti
-		 if(settingPref.contains("notiIsOn"));
-		 else editor.putBoolean("notiIsOn", true);
-		 //THEME
-		 if(settingPref.contains("THEME"));
-		 else editor.putInt("THEME", R.color.yellow);
-		 editor.commit();
-		 
-		 
+		settingPref = getSharedPreferences("settingPref", 0);
+		editor = settingPref.edit();
+		
+		// noti
+		if (settingPref.contains("notiIsOn"));
+		else editor.putBoolean("notiIsOn", true);
+		
+		// THEME
+		if (settingPref.contains("THEME"));
+		else editor.putInt("THEME", R.color.yellow);
+		
+		editor.commit();
 
 		mDBmanager = IngredientDBManager.getInstance(this);
 

@@ -145,22 +145,22 @@ public class BaseAdapter_bookmark extends BaseAdapter {
 		{
 			switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
 			{
-			case R.color.green :
-				itemLayout.setBackgroundColor(Color.rgb(166, 196, 109));
-				break;
-			default :
-				itemLayout.setBackgroundColor(Color.rgb(255, 140, 90));
+				case R.color.green :
+					itemLayout.setBackgroundColor(Color.rgb(166, 196, 109));
+					break;
+				default :
+					itemLayout.setBackgroundColor(Color.rgb(155, 155, 84));
 			}
 		}
 		else
 		{
 			switch(MainActivity.settingPref.getInt("THEME", R.color.yellow))
 			{
-			case R.color.green :
-				itemLayout.setBackgroundColor(Color.rgb(205, 240, 150));
-				break;
-			default :
-				itemLayout.setBackgroundColor(Color.rgb(255, 255, 0));
+				case R.color.green :
+					itemLayout.setBackgroundColor(Color.rgb(210, 250, 150));
+					break;
+				default :
+					itemLayout.setBackgroundColor(Color.rgb(255, 255, 90));
 			}
 		}
 
