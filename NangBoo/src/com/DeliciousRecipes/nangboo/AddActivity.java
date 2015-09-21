@@ -75,9 +75,9 @@ public class AddActivity extends Activity {
             //어플리케이션 설치
             AlertDialog.Builder builder = null;
             builder = new AlertDialog.Builder(this);
-            builder.setTitle("Install Barcode Scanner");
-            builder.setMessage("Do you want to install Barcode Scanner Application?");
-            builder.setPositiveButton("Yes",
+            builder.setTitle("바코드 스캐너 설치");
+            builder.setMessage("QR코드 인식을 위해서는 바코드 스캐너 설치가 필요합니다. 설치하시겠습니까?");
+            builder.setPositiveButton("예",
                   new DialogInterface.OnClickListener() {
 
                      @Override
@@ -92,7 +92,7 @@ public class AddActivity extends Activity {
                         startActivity(intent);
                      }
                   });
-            builder.setNegativeButton("No",
+            builder.setNegativeButton("아니오",
                   new DialogInterface.OnClickListener() {
 
                      @Override

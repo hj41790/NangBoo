@@ -45,7 +45,8 @@
         android:layout_margin="40dp"
         android:paddingLeft="8dp"
         android:textSize="20dp"
-		/>
+        android:singleLine="true"
+        android:imeOptions="actionSearch"/>
     
     <Button android:id="@+id/searching_button"
         android:layout_width="wrap_content"

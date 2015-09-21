@@ -5,13 +5,17 @@ import java.net.URLEncoder;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class SearchingActivity extends Activity{
 	
@@ -41,6 +45,34 @@ public class SearchingActivity extends Activity{
 	    
 	    searchingBar.setText(initialText);
 	    
+	    searchingBar.setOnEditorActionListener(new OnEditorActionListener() {
+
+	     	@Override
+	     	public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
+	     		// TODO Auto-generated method stub
+	     		
+	     		if (arg1 == EditorInfo.IME_ACTION_SEARCH) {
+	     			String addURL = "";
+		            // TODO Auto-generated method stub
+		            try {
+		               addURL = URLEncoder.encode (searchingBar.getText().toString(), "UTF-8");
+		            } catch (UnsupportedEncodingException e) {
+		               // TODO Auto-generated catch block
+		               e.printStackTrace();
+		            }
+		            String recipeSearchingURL = "http://allrecipes.kr/m/recipes/search/list?text=" 
+		                                 + addURL;
+					
+					Bundle bundleData = new Bundle();
+					bundleData.putString("URL", recipeSearchingURL);
+
+					Intent intent = new Intent(SearchingActivity.this, WebviewActivity.class);
+					intent.putExtra("SEARCHING_URL", bundleData);
+					startActivity(intent);
+	     		}
+	     		return false;
+	     	}
+	    });
 	    
 	    back.setOnClickListener(new OnClickListener(){
 
@@ -81,5 +113,7 @@ public class SearchingActivity extends Activity{
 	    
 	    
 	}
+	
+	
 
 }

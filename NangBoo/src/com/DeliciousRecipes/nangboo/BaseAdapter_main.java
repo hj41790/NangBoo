@@ -66,6 +66,32 @@ public class BaseAdapter_main extends BaseAdapter {
 
 		return count;
 	}
+	
+	public int deleteExpireItem(){
+		Cursor mCursor = mDBmanager.query(new String[] { "_id"}, null,
+				null, null, null, ORDER_BY[sort_type]);
+
+		int count = 0;
+		
+		int size = mCursor.getCount();
+		String[] tmp = new String[size];
+		
+		for(int i=0; i<size; i++){
+			mCursor.moveToNext();
+			if(mDBmanager.compareExpirationDate(i, sort_type)){ 
+				tmp[count++] = mCursor.getString(0);
+			}
+		}
+		
+		for(int i=0; i<count; i++)
+			mDBmanager.delete("_id="+tmp[i], null);
+		
+		mCursor.close();
+
+		notifyDataSetChanged();
+
+		return count;
+	}
 
 	public void modify(int position, Ingredient tmp) {
 		
@@ -212,6 +238,17 @@ public class BaseAdapter_main extends BaseAdapter {
 		mCursor.close();
 
 		return itemLayout;
+	}
+	
+	public int getSelectedItemCount(){
+		Cursor mCursor = mDBmanager.query(new String[]{"isChoosed"}, "isChoosed=1",
+				 							null, null, null, ORDER_BY[sort_type]);
+		
+		int count = mCursor.getCount();
+		mCursor.close();
+		
+		return count;
+		
 	}
 	
 	private int getID(int position){

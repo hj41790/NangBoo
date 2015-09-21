@@ -191,10 +191,12 @@ public class MainActivity extends Activity {
 				isClicked_chooseButton = false;
 	     		multiple.setBackgroundResource(R.drawable.sort_gray);
 	     		chooseIngredient.setBackgroundResource(R.drawable.select_gray);
-	     		mAdapter.clear();
 
 				Bundle bundleData = new Bundle();
 				bundleData.putString("INGREDIENT", mAdapter.ingredientURL());
+				
+
+	     		mAdapter.clear();
 
 				Intent intent = new Intent(MainActivity.this, SearchingActivity.class);
 				intent.putExtra("SEARCHING_INGREDIENT", bundleData);
@@ -267,9 +269,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onStop() {
-		
-		
-		
 		super.onStop();
 	}
 
@@ -309,18 +308,20 @@ public class MainActivity extends Activity {
 						
 						// 확인 버튼 터치
 						// 여기서 선택한 값을 넘기면됨
-						if (selected == 0){ // QR코드 인식
-							Intent intent = new Intent(MainActivity.this, AddActivity.class);
-							intent.putExtra("qrcode", true);
-							startActivityForResult(intent, ADD_ACTIVITY);
-						}
-						else if (selected == 1) // 직접 입력
+						if (selected == 1) // 직접 입력
 						{
 							dialog.dismiss();
 							Intent intent = new Intent(MainActivity.this, AddActivity.class);
 							intent.putExtra("qrcode", false);
 							startActivityForResult(intent, ADD_ACTIVITY);
 						}
+						else{
+							Intent intent = new Intent(MainActivity.this, AddActivity.class);
+							intent.putExtra("qrcode", true);
+							startActivityForResult(intent, ADD_ACTIVITY);
+						}
+						
+						selected = -1;
 					}
 				})
 				.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -360,6 +361,7 @@ public class MainActivity extends Activity {
 						else if (selected == 2)mAdapter.sort(SORT_REGISTER);	// 등록순
 						else mAdapter.sort(SORT_NAME);							// 아무것도 터치하지 않은 경우 이름순
 
+						selected = -1;
 						dialog.dismiss();
 
 					}
@@ -378,23 +380,48 @@ public class MainActivity extends Activity {
 	private void createDeleteDialog() {
 
 		mDialog = new CustomDialog(this);
-
-		mDialog.setTitle("삭제");
-		mDialog.setContentText("선택하신 항목을 삭제하시겠습니까?");
-
+		
+		int count = mAdapter.getSelectedItemCount();
+		
+		if(count==0){
+			mDialog.setTitle("유통기한 만료 식재료 삭제");
+			mDialog.setContentText("유통기한이 지난 식재료를 모두 삭제하시겠습니까?");
+		}
+		else{		
+			mDialog.setTitle("삭제");
+			mDialog.setContentText("선택하신 항목을 삭제하시겠습니까?");
+		}
+		
 		mDialog.setOKClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				int count = mAdapter.delete();
+				
+				int tmp;
+				
+				if(mAdapter.getSelectedItemCount()==0){ 
+					tmp = mAdapter.deleteExpireItem();
 
-				if (count > 0)
-					Toast.makeText(MainActivity.this, "삭제되었습니다.",
-							Toast.LENGTH_SHORT).show();
-				else
-					Toast.makeText(MainActivity.this, "선택한 항목이 없습니다.",
-							Toast.LENGTH_SHORT).show();
+					if (tmp > 0)
+						Toast.makeText(MainActivity.this, "삭제되었습니다.",
+								Toast.LENGTH_SHORT).show();
+					else
+						Toast.makeText(MainActivity.this, "유통기한이 지난 항목이 없습니다.",
+								Toast.LENGTH_SHORT).show();
 
+				}
+				else{ 
+					tmp = mAdapter.delete();
+
+					if (tmp > 0)
+						Toast.makeText(MainActivity.this, "삭제되었습니다.",
+								Toast.LENGTH_SHORT).show();
+					else
+						Toast.makeText(MainActivity.this, "선택한 항목이 없습니다.",
+								Toast.LENGTH_SHORT).show();
+
+				}
+				
 				mDialog.dismiss();
 			}
 		});

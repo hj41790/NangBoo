@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 public class SettingActivity extends Activity {
 
-	final String[] items = new String[]{"    알림", "    테마", "    글자 크기", "    버전 및 개발진 정보"};
+	final String[] items = new String[]{"    알림", "    테마", "    버전 및 개발진 정보"};
 	
 	AlertDialog.Builder builder = null;
 
