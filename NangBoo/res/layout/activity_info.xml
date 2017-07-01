@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.DeliciousRecipes.nangboo.InfoActivity"
+    android:background="@color/white" 
+    android:orientation="vertical">
+    
+    <!--  액션바 대신에 LinearLayout! height는 40dp로 통일해주세용 -->
+    
+    <LinearLayout
+        android:id="@+id/action_bar_info"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:text="@string/back"
+            android:background="@color/clarity"
+            />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_horizontal"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/ok_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:background="@color/clarity"
+            android:text="" />
+	</LinearLayout>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=	"*** 냉장고를 부탁해! ***\n\n모든 레시피 검색은 AllRecipes에서 이루어집니다.\nallrecipes.kr\n\nminimum SDK : 16\ntarget SDK : 19"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="20dp"
+        android:paddingTop="40dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+         />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=	"***     개발진      ***\n\n숭실대학교 컴퓨터학부\n20142405 이경원\n20142449 천성호\n20142461 최혜정"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="20dp"
+        android:paddingTop="40dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+         />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=	"\n\n\n저희 정신적 지주가 되어주신 김수동 교수님께 \n깊은 감사의 말씀을 드립니다!"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="20dp"
+        android:paddingTop="40dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+         />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=	"Delicious Recipes"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="20dp"
+        android:paddingTop="40dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+         />
+
+</LinearLayout>

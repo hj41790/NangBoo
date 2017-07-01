@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/white">
+    
+    <LinearLayout
+        android:id="@+id/action_bar_searching"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/back_button_searching"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:text="@string/back"
+            android:background="@color/clarity"
+            />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_horizontal"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/searching_text"
+        android:textSize="17dp"/>
+    
+    <EditText android:id="@+id/searching_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="40dp"
+        android:paddingLeft="8dp"
+        android:textSize="20dp"
+        android:singleLine="true"
+        android:imeOptions="actionSearch"/>
+    
+    <Button android:id="@+id/searching_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="검색"/>
+
+</LinearLayout>

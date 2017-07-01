@@ -1,0 +1,124 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.DeliciousRecipes.nangboo.NotiActivity" >
+
+        <!--  액션바 대신에 LinearLayout! height는 40dp로 통일해주세용 -->
+    
+    <LinearLayout
+        android:id="@+id/action_bar_noti"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/back_button_noti"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:text="@string/back"
+            android:background="@color/clarity"
+            />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_horizontal"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/ok_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:background="@color/clarity"
+            android:text="" />
+	</LinearLayout>
+	
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+        
+        <TextView
+            android:id="@+id/textview_noti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:text="유통기한이 임박한 재료들에 대한 알림 여부와 알림 시각을 설정합니다."
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+        
+        <View       
+            android:id="@+id/line_noti"
+        	android:layout_below="@id/textview_noti"
+            android:layout_width="match_parent"
+			android:layout_height="2dip"        
+		 	android:background="#000"
+			android:layout_marginTop="20dp"
+    	    android:layout_marginRight="25dp"
+       	    android:layout_marginLeft="25dp"
+
+		 />
+    	
+    	<Switch
+    	    android:id="@+id/onoff_switch_noti"
+    	    android:layout_width="match_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@id/line_noti"
+    	    android:layout_marginLeft="40dp"
+    	    android:layout_marginRight="40dp"
+    	    android:layout_marginTop="40dp"
+    	    android:checked="true"
+    	    android:text="알림 설정"
+    	    android:textColor="@color/black"
+    	    android:textColorLink="@android:color/white"
+    	    android:textSize="20dp" />
+    	
+    	<LinearLayout
+    	    android:id="@+id/time_layout"
+    	    android:layout_width="match_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@id/onoff_switch_noti"
+    	    android:layout_marginLeft="40dp"
+    	    android:layout_marginRight="40dp"
+    	    android:layout_marginTop="20dp"
+    	    android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/time_textView_noti"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="left|center_vertical"
+                android:gravity="center_vertical"
+                android:text="알림 시각"
+                android:textColor="#000"
+                android:textSize="20dp" >
+
+            </TextView>
+        	<Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            />
+
+            <Button
+                android:id="@+id/time_button_noti"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="#dedede"
+                android:text="18시 00분" >
+
+            </Button>
+        </LinearLayout>
+    	
+    </RelativeLayout>
+    
+</LinearLayout>
